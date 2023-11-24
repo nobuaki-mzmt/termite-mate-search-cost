@@ -7,9 +7,299 @@
 
 #------------------------------------------------------------------------------#
 {
-  library(car)
-  library(lme4)
-  library(exactRankTests)
+  library(data.table)
+  library(stringr)
+}
+
+
+function(){
+  
+  f.namesplace <- list.files("data/raw/ANTAM_4day", pattern=".csv",full.names=T)
+  f.names <- list.files("data/raw/ANTAM_4day", pattern=".csv",full.names=F)
+  
+  for(i_files in 1:length(f.namesplace)){
+    
+    # prep data
+    d <- data.frame(fread(f.namesplace[i_files], header=F))[,c(6,4,5)]
+    colnames(d) = c("time", "x", "y")
+    
+    colony <- str_split(f.names[i_files], "_")[[1]][3]
+    sex <- str_split(f.names[i_files], "_")[[1]][4]
+    day <- as.numeric(str_sub(str_split(f.names[i_files], "_")[[1]][6], 1, 1))-1
+    id <- str_split(f.names[i_files], ".c")[[1]][1]
+    
+    d[,2:3] <-d[,2:3] * 0.023725 # scale
+    d <- (d[d$time>60*5,])  # remove first 5 min data
+    
+    d[,1] <- d[,1] - d[1,1]	
+    d[,2] <- d[,2] - d[1,2]
+    d[,3] <- d[,3] - d[1,3]
+    
+    # data smoothing -> choose the closest time value
+    new.time = seq(0, 1500, 0.2)
+    new.x = new.y = new.time
+    
+    for(i_time in 2:length(new.x)){
+      d[2,1]
+      new.time[2]
+    }
+
+    
+    # for msd
+    step_length    <- c(0, sqrt( diff(d$x)^2 + diff(d$y)^2 ))
+    diffusion_dis  <- sqrt(d$x^2 + d$y^2)
+    cum_travel_dis <- cumsum(step_length)
+    
+    plot(cum_travel_dis, diffusion_dis, log="xy")
+    
+    msd2 <- log10(diffusion_dis)[-1]
+    tau2 <- log10(cum_travel_dis)[-1]
+    r <- lm(msd2~tau2)
+    D[num] <- 10^r$coef[1]
+    a[num] <- r$coef[2]
+    
+  }
+  
+}
+
+
+### msd analysis
+tau <- matrix(0, ncol=length(f.namesplace), 100)
+msd <-  matrix(0, ncol=length(f.namesplace), length(tau[,1]))
+name = colony = sex = rep = day  <- rep(0,length(f.namesplace))
+D = a <- rep(0,length(f.namesplace)) 
+Xrange <- c(1,5000)
+Yrange <- c(1,10^6)
+par(mfrow=c(4,5),pin=c(1.5,1.5))
+for(num in 1:length(f.namesplace)){
+  
+  d <- read.csv(f.namesplace[num],sep=",",header=F)[,c(6,4,5)]
+  namebegin <- regexpr("mouselog_",f.namesplace[num]) + 9
+  nameend <- regexpr(".csv",f.namesplace[num]) - 1
+  
+  name[num] <- substring(f.namesplace[num],namebegin, nameend)
+  colony[num] <- substring(f.namesplace[num],namebegin, namebegin+5)
+  sex[num] <- substring(f.namesplace[num],namebegin+7, namebegin+7)
+  rep[num] <- substring(f.namesplace[num],namebegin+8, namebegin+8)
+  day[num] <- (substring(f.namesplace[num],nameend, nameend))
+  
+  d <- cut(d)
+  
+  ds <- length(d[,1])
+  dis <- c(0, ((d[2:ds,2]-d[2:ds-1,2])^2 + (d[2:ds,3]-d[2:ds-1,3])^2)^0.5)
+  tau[,num] <- seq(floor(sum(dis)/1000)*1000/1000, floor(sum(dis)/1000)*1000/10,length=100)
+  if(sum(tau[,num])==0){
+    tau[,num] <- seq(floor(sum(dis)/100)*100/100, floor(sum(dis)/100)*100,length=100)
+  }
+  if(sum(tau[,num])==0){
+    next
+  }
+  
+  for(j in 1:length(tau[,1])){
+    displacement <- rep(0,sum(dis)/tau[j,num])
+    count <- 1
+    moved <- 0
+    move <- 0
+    cycle <- 0
+    beginX <- d[1,2]
+    beginY <- d[1,3]
+    for(i in 2:ds){
+      at.moved <- dis[i]
+      moved <- moved + at.moved
+      if(moved >= tau[j,num]+0.00000000001){
+        while(moved >= tau[j,num]+0.00000000001){
+          cycle = 0
+          # ?O?Տ??̓_?̊Ԃ̈ړ??͓????????^???Ɖ??肵?Atau?ɓ??B???_?̓_(ax,ay)???z??
+          ax <- d[i-1,2] + (d[i,2]-d[i-1,2]) * ((tau[j,num]-(moved-at.moved)+cycle)/at.moved)
+          ay <- d[i-1,3] + (d[i,3]-d[i-1,3]) * ((tau[j,num]-(moved-at.moved)+cycle)/at.moved)
+          displacement[count] <- ((ax-beginX)^2 + (ay-beginY)^2)^0.5
+          count <- count +1
+          beginX <- ax
+          beginY <- ay 
+          moved <- (((d[i,2]-ax)^2 + (d[i,3]-ay)^2))^0.5
+          cycle = cycle + 1
+        }	
+      }
+    }
+    msd[j,num] <- mean(displacement^2)
+  }
+  
+  
+  if(as.numeric(day[num])>1){
+    par(new=T)
+    plot(tau[,num],msd[,num],log="xy",xlim=c(0.9,10000),ylim=c(0.9,10^7),col=as.numeric(day[num]),ann=F,axes=F)
+  }else{
+    plot(tau[,num],msd[,num],log="xy",xlim=c(0.9,10000),ylim=c(0.9,10^7),col=as.numeric(day[num]),main=paste(colony[num],sex[num],rep[num],sep=""))
+  }
+  
+  msd2 <- log10(msd[,num])#[tau<101]
+  tau2 <- log10(tau[,num])#[tau<101]
+  r <- lm(msd2~tau2)
+  D[num] <- 10^r$coef[1]
+  a[num] <- r$coef[2]
+  
+  abline(log10(D[num]),a[num],col=as.numeric(day[num]))
+  print(name[num]);print(a[num])
+}
+
+d <- data.frame(colony=colony, sex=sex, rep=rep, id = paste(colony,sex,rep,sep=""),day=as.numeric(day),  D=D, a=a)
+
+par(pin=c(3,3))
+Xrange <- c(10,1000)
+Yrange <- c(10,10^5)
+plot(0,log="xy",xlim=Xrange,ylim=Yrange,ann=F,axes=F,type="n")
+for( i in 47:50){
+  par(new=T)
+  plot(tau,msd[,i],log="xy",xlim=Xrange,ylim=Yrange,col=as.numeric(day[i]))
+}
+
+r <- lmer(a~day*sex+(1|colony/id)+(0+day|colony/id),data=d)
+summary(r)
+Anova(r)
+
+
+
+
+## general data
+
+## analysis condition
+FPS <- 5	## FPS using in analysis
+secper <- 1/FPS	## 1?R?}????????sec
+steps <- FPS * 60 *25	## 25???̃R?}??
+
+## reading parameters
+x = y = sec = time <-  matrix(0, ncol=length(f.namesplace), steps)
+name = colony = sex = rep = day = totaldis <- rep(0,length(f.namesplace))
+angle = dis = move = speed = acceleration <- matrix(0, ncol=length(f.namesplace), steps)
+
+for(num in 1:length(f.namesplace)){
+  
+  d <- read.csv(f.namesplace[num],sep=",",header=F)[,c(6,4,5)]
+  namebegin <- regexpr("mouselog_",f.namesplace[num]) + 9
+  nameend <- regexpr(".csv",f.namesplace[num]) - 1
+  
+  name[num] <- substring(f.namesplace[num],namebegin, nameend)
+  colony[num] <- substring(f.namesplace[num],namebegin, namebegin+5)
+  sex[num] <- substring(f.namesplace[num],namebegin+7, namebegin+7)
+  rep[num] <- substring(f.namesplace[num],namebegin+8, namebegin+8)
+  day[num] <- (substring(f.namesplace[num],nameend, nameend))
+  
+  d <- cut(d)
+  
+  point <- 1:steps * (1/FPS)
+  count <- 1
+  for(i in 1:length(d[,1])){
+    if(count > length(point)){ break }
+    if(d[i,1] > point[count]){
+      time[count,num] <- point[count]
+      x[count,num] <- d[i-1,2] + (d[i,2]-d[i-1,2]) * ((point[count]-d[i-1,1])/(d[i,1]-d[i-1,1]))
+      y[count,num] <- d[i-1,3] + (d[i,3]-d[i-1,3]) * ((point[count]-d[i-1,1])/(d[i,1]-d[i-1,1]))
+      count <- count + 1
+    }
+  }
+  
+  sec[,num] <- c(0, time[2:steps,num] - time[2:steps-1,num])
+  dis[,num] <- c(0, ((x[2:steps,num]-x[2:steps-1,num])^2 + (y[2:steps,num]-y[2:steps-1,num])^2)^0.5)
+  speed[,num] <- dis[,num]/sec[,num]
+  acceleration[,num] <- c(0, speed[2:steps,num] - speed[2:steps-1,num])
+  
+  Ax <- (x[3:steps-1,num] - x[3:steps-2,num])
+  Bx <- (x[3:steps,num] - x[3:steps-1,num])
+  Ay <- (y[3:steps-1,num] - y[3:steps-2,num])
+  By <- (y[3:steps,num] - y[3:steps-1,num])
+  hugo <- (Ax * By - Ay * Bx + 0.000001)/abs(Ax * By - Ay * Bx + 0.000001)
+  cos <- (Ax * Bx + Ay * By) / ((Ax^2 + Ay^2)*(Bx^2 + By^2))^0.5
+  angle[,num] <- c(0,0,acos(cos) * hugo)
+  
+  totaldis[num] <- sum(dis[,num])
+  
+  print(name[num])
+}
+
+d <- data.frame(colony=colony, sex=sex, rep=rep, id = paste(colony,sex,rep,sep=""),day=as.numeric(day),
+                D=D, a=a, totaldis=totaldis, meanangle=meanangle, stop=stop, meanspeed = meanspeed)
+
+r <- lmer(totaldis~day*sex+(1|colony/id),data=d)
+summary(r)
+Anova(r)
+plot(totaldis~day,data=d,col=3-as.numeric(sex))
+
+r <- lmer(meanangle~day*sex+(1|colony/id),data=d)
+summary(r)
+Anova(r)
+plot(meanangle~day,data=d,col=3-as.numeric(sex))
+
+r <- glmer(stop~day*sex+(1|colony/id),data=d,family=poisson)
+summary(r)
+Anova(r)
+plot(stop~day,data=d,col=3-as.numeric(sex))
+
+plot(totaldis~stop,data=d,col=3-as.numeric(sex))
+
+S <- as.vector(speed)
+meanspeed <- tapply(S[S>0 & !(is.na(S))],rep(name,each=7500)[S>0 & !(is.na(S))],mean)
+r <- lmer(meanspeed ~day*sex+(1|colony/id),data=d)
+summary(r)
+Anova(r)
+plot(meanspeed ~day,data=d,col=3-as.numeric(sex))
+
+plot(totaldis ~a,data=d[d$a>0,],col=3-as.numeric(sex))
+r <- lmer(totaldis~a+day*sex+(1|colony/id),data=d[d$a>0,])
+Anova(r)
+
+stop <- apply(na.omit(speed)==0,2,sum)
+
+meanangle <- tapply(abs(na.omit(as.vector(angle))),rep(name,each=7500)[!(is.na(as.vector(angle)))],mean)
+
+
+
+#write.table(d,"res.txt")
+
+
+
+## ?O??plot
+# ?S??
+Day <- as.numeric(day)
+par(mfrow=c(4,5),pin=c(1.5,1.5))
+range <- 2000
+for(num in 1:length(f.namesplace)){
+  if(sex[num] == "F"){Col=2}else{Col=1}
+  if(Day[num] == 1){
+    plot(x[,num],y[,num],xlim=c(-range,range),ylim=c(-range,range),col=Day[num],type="l",main=paste(colony[num],sex[num],rep[num],sep=""))
+  }else{
+    par(new=T)
+    plot(x[,num],y[,num],xlim=c(-range,range),ylim=c(-range,range),col=Day[num],type="l",ann=F,axes=F)
+  }
+}
+
+
+
+
+
+
+
+
+## L?vy?@walk ??
+par(mfrow=c(3,3),pin=c(2,2))
+for(num in c(2,8,10,12,14,29,44,50,54)){
+  range <- c(min(c(x[,num],y[,num])),max(c(x[,num],y[,num])))
+  plot(x[,num],y[,num],col=1,type="l",xlim=range,ylim=range,main=paste(colony[num],sex[num],rep[num],sep=""))
+}
+
+## ???܂???
+par(mfrow=c(3,3),pin=c(2,2))
+for(num in c(18,20,21,27,28,41,49,56,60)){
+  range <- c(min(c(x[,num],y[,num])),max(c(x[,num],y[,num])))
+  plot(x[,num],y[,num],col=1,type="l",xlim=range,ylim=range,main=paste(colony[num],sex[num],rep[num],sep=""))
+}
+
+
+
+## ???܂???
+par(mfrow=c(7,8),pin=c(1,1))
+for(num in setdiff( setdiff(1:72, c(2,8,10,12,14,29,44,50,54)), c(18,20,21,27,28,41,49,56,60))){
+  range <- c(min(c(x[,num],y[,num])),max(c(x[,num],y[,num])))
+  plot(x[,num],y[,num],col=1,type="l",xlim=range,ylim=range,main=paste(colony[num],sex[num],rep[num],sep=""))
 }
 
 
