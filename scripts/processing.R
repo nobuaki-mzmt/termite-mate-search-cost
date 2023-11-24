@@ -11,13 +11,17 @@
   library(stringr)
 }
 
-
-function(){
+#------------------------------------------------------------------------------#
+# Convert csv files to single rda file
+#------------------------------------------------------------------------------#
+data.convert <- function(){
   
   f.namesplace <- list.files("data/raw/ANTAM_4day", pattern=".csv",full.names=T)
   f.names <- list.files("data/raw/ANTAM_4day", pattern=".csv",full.names=F)
   
+  df_all <- NULL
   for(i_files in 1:length(f.namesplace)){
+    print(paste(i_files, "/", length(f.names), " ", f.names[i_files]))
     
     # prep data
     d <- data.frame(fread(f.namesplace[i_files], header=F))[,c(6,4,5)]
@@ -25,8 +29,9 @@ function(){
     
     colony <- str_split(f.names[i_files], "_")[[1]][3]
     sex <- str_split(f.names[i_files], "_")[[1]][4]
+    ind <- str_split(f.names[i_files], "_")[[1]][5]
     day <- as.numeric(str_sub(str_split(f.names[i_files], "_")[[1]][6], 1, 1))-1
-    id <- str_split(f.names[i_files], ".c")[[1]][1]
+    id <- paste("Rs", colony, sex, ind, sep="_")
     
     d[,2:3] <-d[,2:3] * 0.023725 # scale
     d <- (d[d$time>60*5,])  # remove first 5 min data
@@ -35,16 +40,35 @@ function(){
     d[,2] <- d[,2] - d[1,2]
     d[,3] <- d[,3] - d[1,3]
     
-    # data smoothing -> choose the closest time value
-    new.time = seq(0, 1500, 0.2)
-    new.x = new.y = new.time
+    time = seq(0, 1500, 0.2)
+    x = approx(d$time, d$x, xout=time)$y
+    y = approx(d$time, d$y, xout=time)$y
+    step_length = c(0, sqrt( diff(x)^2 + diff(y)^2))
     
-    for(i_time in 2:length(new.x)){
-      d[2,1]
-      new.time[2]
-    }
+    d.adjust <- data.frame(
+      colony, sex, day, id,
+      time, x, y, step_length,
+      pause = step_length < 0.70, # Mizumoto and Dobata 2019 Sci Adv
+      diffusion_dis = sqrt(x^2 + y^2),
+      cum_travel_dis = cumsum(step_length)
+    )
+    
+    df_all <- rbind(df_all, d.adjust)
+  }
+  save(df_all, file = "data/df_all.rda")
+}
+#------------------------------------------------------------------------------#
 
-    
+load("data/df_all.rda")
+
+step_length <- c(0, sqrt( diff(df_all$x)^2 + diff(df_all$y)^2  ))
+step_length[df_all$time==0] = 0
+pause <- step_length < 0.70 # Mizumoto and Dobata 2019 Sci Adv
+diffusion_dis  <- sqrt(df_all$x^2 + df_all$y^2)
+cum_travel_dis <- cumsum(step_length)
+
+truehist(step_length)
+
     # for msd
     step_length    <- c(0, sqrt( diff(d$x)^2 + diff(d$y)^2 ))
     diffusion_dis  <- sqrt(d$x^2 + d$y^2)
@@ -55,9 +79,10 @@ function(){
     msd2 <- log10(diffusion_dis)[-1]
     tau2 <- log10(cum_travel_dis)[-1]
     r <- lm(msd2~tau2)
-    D[num] <- 10^r$coef[1]
-    a[num] <- r$coef[2]
+    D <- 10^r$coef[1]
+    a <- r$coef[2]
     
+    # 
   }
   
 }
