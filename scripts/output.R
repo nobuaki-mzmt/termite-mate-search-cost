@@ -21,64 +21,98 @@
 
 rm(list = ls())
 
-load("data/df_all.rda")
-
-ggplot(df_all, aes(x=x, y=y, group=day, col=as.factor(day))) +
-  geom_path() +
-  scale_color_viridis(discrete = T, option = "D")+
-  theme_classic()+
-  facet_wrap(~id, scales = "free")+
-  theme(aspect.ratio = 1, legend.position = "none") 
-
-ids = unique(df_all$id)
-
-for(i in 1:length(ids)){
-  df <- subset(df_all, id==ids[i])
-  step_length    <- c(0, sqrt( diff(df$x)^2 + diff(df$y)^2 ))
-  step_length[df$time==0] = 0
-  df$step_length = step_length
+#------------------------------------------------------------------------------#
+plot_trajectories <- function(){
+  load("data/df_all.rda")
   
-  ggplot(df, aes(x=x, y=y, group=day, col=as.factor(day))) +
+  ## show all trajectories
+  ggplot(df_all, aes(x=x, y=y, group=day, col=as.factor(day))) +
     geom_path() +
     scale_color_viridis(discrete = T, option = "D")+
-    theme_classic()+
-    coord_fixed()+
-    ggtitle(ids[i])
-  ggsave(paste0("output/trajectories_",ids[i],".pdf"), width=4, height=4)
+    theme(aspect.ratio = 1, legend.position = "none") +
+    ylab("y (mm)") +
+    xlab("x (mm)") +
+    theme_bw()+
+    theme(aspect.ratio = 1, legend.position = "bottom") +
+    theme(strip.text = element_text(size = 7, margin = margin()),
+          axis.text=element_text(size=6),)+
+    theme(strip.background = element_rect(colour="#00000000", fill="#00000000"))+
+    facet_wrap(.~id, ncol=6) + labs(color = "Day")
+  ggsave(paste0("output/trajectories_all.pdf"), width=7.5, height=5)
   
-  ggplot(df, aes(x=step_length, group=day, fill=as.factor(day)))  +
-    geom_density(alpha=.3)+
-    scale_fill_viridis(discrete = T)+
-    scale_x_continuous(limits = c(0,10))+
-    theme_classic()+
-    ggtitle(ids[i])+
-    annotate("segment",x=0.70,xend=0.70,y=2,yend=1, col=2,
-             arrow=arrow(ends = "last", angle = 30,length = unit(.2,"cm")))
+  # step length distribution for each individiaul
+  ids = unique(df_all$id)
+  for(i in 1:length(ids)){
+    df <- subset(df_all, id==ids[i])
+    step_length    <- c(0, sqrt( diff(df$x)^2 + diff(df$y)^2 ))
+    step_length[df$time==0] = 0
+    df$step_length = step_length
     
-  ggsave(paste0("output/steplength_",ids[i],".pdf"), width=4, height=4)  
+    ggplot(df, aes(x=step_length, group=day, fill=as.factor(day)))  +
+      geom_density(alpha=.3)+
+      scale_fill_viridis(discrete = T)+
+      scale_x_continuous(limits = c(0,10))+
+      theme_classic()+
+      ggtitle(ids[i])+
+      annotate("segment",x=0.70,xend=0.70,y=2,yend=1, col=2,
+               arrow=arrow(ends = "last", angle = 30,length = unit(.2,"cm")))
+    
+    ggsave(paste0("output/steplength/steplength_",ids[i],".pdf"), width=4, height=4)  
+  }
+  
 }
+#------------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------------#
+plot_MSD <- function(){
+  load("data/df_all.rda")
+  
+  df_MSD <- transform(df_MSD, day= factor(day))
+  ggplot(df_MSD, aes(x=log10(tau), y=log10(MSD), color=day, fill=day))+
+    geom_path(alpha=0.2) + 
+    stat_smooth(method = "gam") +
+    #facet_wrap(.~sex) +
+    scale_color_viridis(discrete=T)+
+    scale_fill_viridis(discrete=T)+
+    #scale_x_log10() + 
+    #scale_y_log10()+
+    theme_classic()+
+    theme(legend.position = "none") +
+    theme(strip.text = element_text(size = 7, margin = margin()),
+          axis.text=element_text(size=6),)+
+    theme(strip.background = element_rect(colour="#00000000", fill="#00000000"))
+  ggsave("output/MSD.pdf", width=3, height=4)
+  df_MSD_extract <- df_MSD[df_MSD$tau %in% c(.2,.5,1,2,5,10,20,50,100,200,500,1000), ]
+  r <- lmer(log10(MSD)~log10(tau)*day*sex+(1|colony/id), data=df_MSD_extract)
+  Anova(r)
+}
+#------------------------------------------------------------------------------#
 
 
-load("data/df_all.rda")
-library(ggplot2)
-library(viridis)
-ggplot(df_MSD, aes(x=tau, y=MSD, color=as.factor(day), group=id))+
-  geom_path() + facet_wrap(.~sex) +
-  scale_color_viridis(discrete=T)+
-  scale_x_log10() + scale_y_log10()
+Step_count <- table(df_pause[,c("pause.duration", "day")])
+Step_ratio <- t(t(Step_count)/apply(Step_count, 2, sum))
+Step_cums  <- apply(Step_ratio, 2, cumsum)
 
-ggplot(df_MSD, aes(x=tau, y=MSD, 
-                   color=as.factor(day),
-                   fill=as.factor(day)))+
-  geom_path(alpha=0.2) + 
-  stat_smooth(method = "gam") +
-  facet_wrap(.~sex) +
-  coord_fixed()+
-  scale_color_viridis(discrete=T)+
-  scale_fill_viridis(discrete=T)+
-  scale_x_log10() + scale_y_log10()
+df_fitting <- data.frame(
+  day = rep(0:3, each=dim(Step_count)[1]),
+  Step_label = rep(as.numeric(rownames(Step_cums)),4),
+  Step_count = as.vector(Step_count),
+  Step_ratio = as.vector(Step_ratio),
+  Step_cums = as.vector(Step_cums)
+)
+df_fitting[df_fitting$Step_count>0,]
 
-df_pause
+matplot((as.numeric(rownames(Step_cums)))/5, 1-Step_cums, type="p", log="xy", pch=19, cex=0.5)
+
+plot((as.numeric(rownames(Step_cums))), Step_cums[,1])
+Step_ratio <- Step_count / sum(Step_count)
+Step_cum <- rep(0, length(Step_ratio))
+
+
+ggplot(df_pause, aes(x=pause.duration, y=cumsum(count), color=as.factor(day)))+
+         geom_line()+geom_point()+
+         facet_wrap(.~sex)
+
 
 ggsurvplot(
   fit = survfit(Surv((log10(1+pause.duration*0.2))) ~as.factor(day), 
@@ -91,67 +125,38 @@ ggsurvplot(
 )
 
 
-ids = unique(df_all$id)
-df_sum <- NULL
-for(i in 1:length(ids)){
-  for(i_day in 0:3){
-    df <- subset(df_all, id==ids[i] & day==i_day)
-    traveled_dis <- sum(df$step_length)
-    mean_moving_speed <- mean(df$step_length[df$pause == 0], na.rm=T)
-    pause_duration <- sum(df$pause)
-    
-    df_msd <- subset(df_MSD, id==ids[i] & day==i_day)
-    r <- lm(log10(MSD)~log10(tau), data=df_msd)
-    D <- 10^r$coef[1]
-    a <- r$coef[2]
-    
-    angle_cal <- function(X, Y, Length){
-      Ax <- (X[3:Length-1] - X[3:Length-2])
-      Bx <- (X[3:Length] - X[3:Length-1])
-      Ay <- (Y[3:Length-1] - Y[3:Length-2])
-      By <- (Y[3:Length] - Y[3:Length-1])
-      hugo <- (Ax * By - Ay * Bx + 0.000001)/abs(Ax * By - Ay * Bx + 0.000001)
-      cos <- round((Ax * Bx + Ay * By) / ((Ax^2 + Ay^2)*(Bx^2 + By^2))^0.5,14)
-      return(acos(cos)*hugo)
-    }
-    angle <- c(NA,NA, angle_cal(df$x, df$y, dim(df)[1]))
-    if (length(na.omit(angle[df$pause==0])) > 0){
-      mle_wrpcauchy <- wrpcauchy.ml(na.omit(angle[df$pause==0]), 0, 0, acc=1e-015)
-      mu <- as.numeric(mle_wrpcauchy[1])
-      rho <- as.numeric(mle_wrpcauchy[2])
-    } else{
-      mu <- NA
-      rho <- NA
-    }
-    
-    df_temp <- data.frame(
-      df[1,1:4], traveled_dis, mean_moving_speed, pause_duration,
-      D, a, mu, rho
-    )
-    df_sum <- rbind(df_sum, df_temp)
-  }
+#
+function(){
+  load("data/df_sum.rda")
+  ggplot(df_sum, aes(x=day, y=traveled_dis, col=sex))+
+    geom_point(position = position_dodge(width = 0.1))+
+    stat_summary(geom="errorbar", position = position_dodge(width = 0.1),
+                 width=.1)+
+    scale_color_viridis(discrete = T, end=.5)
+  
+  install.packages("PupillometryR")
+  library(PupillometryR)
+  df_sum = transform(df_sum, day=factor(day))
+  ggplot(df_sum, aes(x = (day), y = traveled_dis, fill = sex)) +
+    geom_flat_violin(aes(fill = sex),position = position_nudge(x = .1, y = 0), adjust = 1.5, trim = TRUE, alpha = .5, colour = NA)+
+    geom_point(aes(x = as.numeric(day)-.15, y = traveled_dis, colour = sex),position = position_jitter(width = .05), size = 1, shape = 20)+
+    geom_boxplot(aes(x = day, y = traveled_dis, fill = sex),outlier.shape = NA, alpha = .5, width = .1, colour = "black")+
+    scale_colour_brewer(palette = "Dark2")+
+    scale_fill_brewer(palette = "Dark2")
+  
+  r = lmer(traveled_dis ~ day * sex + (1|colony/id), data=df_sum)
+  Anova(r)
+  
+  r = lmer(mean_moving_speed ~ day + sex + (1|colony/id), data=df_sum)
+  Anova(r)
+  
+  r = lmer(rho ~ day + sex + (1|colony/id), data=df_sum)
+  Anova(r)
+  
+  r = lmer(a ~ day + sex + (1|colony/id), data=df_sum)
+  Anova(r)
+  
 }
-
-ggplot(df_sum, aes(x=day, y=a, col=sex))+
-  geom_point(position = position_dodge(width = 0.1))+
-  stat_summary(geom="errorbar", position = position_dodge(width = 0.1),
-               width=.1)+
-  scale_color_viridis(discrete = T, end=.5)
-
-library(lme4)
-library(car)
-r = lmer(rho ~ day + sex + (1|colony/id), data=df_sum)
-Anova(r)
-
-r = lmer(a ~ day + sex + (1|colony/id), data=df_sum)
-Anova(r)
-
-r = lmer(traveled_dis ~ day + sex + (1|colony/id), data=df_sum)
-Anova(r)
-
-r = lmer(mean_moving_speed ~ day + sex + (1|colony/id), data=df_sum)
-Anova(r)
-
 
 
 #------------------------------------------------------------------------------#

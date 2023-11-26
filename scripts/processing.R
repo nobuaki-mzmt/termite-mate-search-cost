@@ -14,6 +14,7 @@
 }
 {
   data.convert(7500)
+  data.summarize()
 }
 #------------------------------------------------------------------------------#
 
@@ -104,5 +105,53 @@ data.convert <- function(msd_max = 5000){
 }
 #------------------------------------------------------------------------------#
 
-
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+data.summarize <- function(){
+  
+  load("data/df_all.rda")
+  
+  ids = unique(df_all$id)
+  df_sum <- NULL
+  for(i in 1:length(ids)){
+    for(i_day in 0:3){
+      df <- subset(df_all, id==ids[i] & day==i_day)
+      traveled_dis <- sum(df$step_length)
+      mean_moving_speed <- mean(df$step_length[df$pause == 0], na.rm=T)
+      pause_duration <- sum(df$pause)
+      
+      df_msd <- subset(df_MSD, id==ids[i] & day==i_day)
+      r <- lm(log10(MSD)~log10(tau), data=df_msd)
+      D <- 10^r$coef[1]
+      a <- r$coef[2]
+      
+      angle_cal <- function(X, Y, Length){
+        Ax <- (X[3:Length-1] - X[3:Length-2])
+        Bx <- (X[3:Length] - X[3:Length-1])
+        Ay <- (Y[3:Length-1] - Y[3:Length-2])
+        By <- (Y[3:Length] - Y[3:Length-1])
+        hugo <- (Ax * By - Ay * Bx + 0.000001)/abs(Ax * By - Ay * Bx + 0.000001)
+        cos <- round((Ax * Bx + Ay * By) / ((Ax^2 + Ay^2)*(Bx^2 + By^2))^0.5,14)
+        return(acos(cos)*hugo)
+      }
+      angle <- c(NA,NA, angle_cal(df$x, df$y, dim(df)[1]))
+      if (length(na.omit(angle[df$pause==0])) > 0){
+        mle_wrpcauchy <- wrpcauchy.ml(na.omit(angle[df$pause==0]), 0, 0, acc=1e-015)
+        mu <- as.numeric(mle_wrpcauchy[1])
+        rho <- as.numeric(mle_wrpcauchy[2])
+      } else{
+        mu <- NA
+        rho <- NA
+      }
+      
+      df_temp <- data.frame(
+        df[1,1:4], traveled_dis, mean_moving_speed, pause_duration,
+        D, a, mu, rho
+      )
+      df_sum <- rbind(df_sum, df_temp)
+    }
+  }
+  save(df_sum, file="data/df_sum.rda")
+}
+#------------------------------------------------------------------------------#
 
