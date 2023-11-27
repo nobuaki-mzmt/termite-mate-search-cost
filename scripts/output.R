@@ -16,6 +16,8 @@
   
   library(ggplot2)
   library(viridis)
+  library(PupillometryR)
+  
 }
 #------------------------------------------------------------------------------#
 
@@ -89,147 +91,12 @@ plot_MSD <- function(){
 #------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
-
-Step_count <- table(df_pause[,c("pause.duration", "day")])
-Step_ratio <- t(t(Step_count)/apply(Step_count, 2, sum))
-Step_cums  <- apply(Step_ratio[nrow(Step_ratio):1,], 2, cumsum)[nrow(Step_ratio):1,]
-
-df_fitting <- data.frame(
-  day = rep(0:3, each=dim(Step_count)[1]),
-  Step_label = rep(as.numeric(rownames(Step_cums)),4),
-  Step_count = as.vector(Step_count),
-  Step_ratio = as.vector(Step_ratio),
-  Step_cums = as.vector(Step_cums)
-)
-df_fitting <- df_fitting[df_fitting$Step_count>0,]
-
-ggplot(df_fitting, aes(x=Step_label, y=Step_cums, col=as.factor(day)))+
-  geom_point()+
-  scale_x_log10()+scale_y_log10()+
-  scale_color_viridis(discrete = T)
-
-matplot((as.numeric(rownames(Step_cums)))/5, 1-Step_cums, type="p", log="xy", pch=19, cex=0.5)
-
-plot((as.numeric(rownames(Step_cums))), Step_cums[,1])
-Step_ratio <- Step_count / sum(Step_count)
-Step_cum <- rep(0, length(Step_ratio))
-
-
-ggplot(df_pause, aes(x=pause.duration, y=cumsum(count), color=as.factor(day)))+
-         geom_line()+geom_point()+
-         facet_wrap(.~sex)
-
-## Truncated power-law
-# r: 0-1
-TP <- function(r,myu,xmin,xmax){
-  return( ( xmax^(1-myu) - (1-r)*(xmax^(1-myu)-xmin^(1-myu) ) )^(1/(1-myu)) )
-}
-
-
-## Stretched exponention
-# r (0-1)
-SE <- function(r, lambda, beta, xmin){
-  return( (xmin^beta - 1/lambda*log(1-r)  )^(1/beta))
-}
-
-
-TP_bin_LLF <- function(param, data, xmin, xmax){
-  j = 1:(max(data)/0.2)
-  dj <- j
-  for(i in j){
-    dj[i] = sum(round(data*5) == i)
-  }
-  return(-length(data)*log(xmin^(1-param)-xmax^(1-param)) +sum(dj*log( (xmin+(j-1)*0.2)^(1-param) - (xmin+j*0.2)^(1-param) )))
-} 
-
-SE_bin_LLF <- function(param, data, xmin){
-  j = 1:(max(data)/0.2)
-  dj <- j
-  for(i in 1:length(j)){
-    dj[i] = sum(round(data*5) == i)
-  }
-  return( length(data)*param[2]*xmin^param[1] + sum( dj*log( exp(-param[2]*(xmin+(j-1)*0.2)^param[1]) - exp(-param[2]*(xmin+j*0.2)^param[1]) ) ) )
-} 
-
-
-## Truncated power-law
-TP_CDF <- function(myu, x, xmin, xmax){
-  (xmin^(1-myu)-x^(1-myu)) / (xmin^(1-myu)-xmax^(1-myu))
-}
-
-## Stretched Exponential
-SE_CDF <- function(lambda, beta, x, xmin){
-  1-exp(-lambda*(x^beta-xmin^beta))
-}
-
-df_fit_model = df_fit_sum <- NULL
-for(i_day in 0:3){
-  print(i_day)
-  StepData <- subset(df_pause, day==i_day)$pause.duration
-  min_sec <- min(StepData)
-  max_sec <- max(StepData)
-  
-  idea.x <- seq(0,0.999,0.001)
-  # fit with truncated Power-law
-  param_TP <- optimize(TP_bin_LLF, interval=c(0,10), data=StepData, xmin=min_sec, xmax=max_sec, maximum=T)
-  y1.est_TP <- TP(idea.x, param_TP$maximum[1], min_sec, max_sec)
-  AIC1.TP <- -2*TP_bin_LLF(param_TP$maximum[1], StepData, min_sec, max_sec)+2*1
-  
-  # fit with stretched exponential
-  param_SE <- optim(c(0.1,0.1), SE_bin_LLF, data=StepData, xmin=min_sec, control = list(fnscale = -1), method="Nelder-Mead")
-  y2.est_SE <- SE(idea.x, param_SE$par[2], param_SE$par[1], min_sec)
-  AIC2.SE <- -2*SE_bin_LLF(param_SE$par, StepData, min_sec)+2*2
-  
-  ## Selection
-  AIC <- c(AIC1.TP, AIC2.SE)
-  delta <- AIC - min(AIC)
-  w1.TP_exp <- exp(-delta[1]/2)/(exp(-delta[1]/2)+exp(-delta[2]/2)) # Akaike weight
-  w2.SE_exp <- exp(-delta[2]/2)/(exp(-delta[1]/2)+exp(-delta[2]/2)) # Akaike weight
-  
-  if(w1.TP_exp > w2.SE_exp){judge <- "TP";}   else { judge <- "SE";}
-  
-  df_fit_sum <- rbind(df_fit_sum, data.frame(param_TP[1], param_TP[2], AIC1.TP, w1.TP_exp, w2.SE_exp, judge))
-  
-  df_temp <- data.frame(
-    day=i_day,
-    idea.x,
-    y1.est_TP,
-    y2.est_SE
-  )
-  df_fit_model <- rbind(df_fit_model, df_temp)
-}
-
-ggplot(df_fitting, aes(x=Step_label, y=Step_cums, col=as.factor(day)))+
-  geom_point()+
-  scale_x_log10()+scale_y_log10()+
-  scale_color_viridis(discrete = T)+
-  geom_path(data=df_fit_model, aes(x=y1.est_TP, y=rev(idea.x)))+
-  geom_path(data=df_fit_model, aes(x=y2.est_SE, y=rev(idea.x)))
-
-
-ggsurvplot(
-  fit = survfit(Surv((log10(1+pause.duration*0.2))) ~as.factor(day), 
-                type = "kaplan-meier", 
-                data = df_pause[df_pause$sex=="F",]),
-  conf.int = F, conf.int.style = "ribbon",
-  xlab = "Duration (min)", 
-  ylab = "Tandem Prob",
-  legend = c(0.8,0.9)
-)
-
-
-#
-function(){
+plot_summary <- function(){
   load("data/df_sum.rda")
-  ggplot(df_sum, aes(x=day, y=traveled_dis, col=sex))+
-    geom_point(position = position_dodge(width = 0.1))+
-    stat_summary(geom="errorbar", position = position_dodge(width = 0.1),
-                 width=.1)+
-    scale_color_viridis(discrete = T, end=.5)
-  
-  install.packages("PupillometryR")
-  library(PupillometryR)
   df_sum = transform(df_sum, day=factor(day))
+  df_sum$pause_duration <- df_sum$pause_duration/5
+  
+  # traveled distances
   ggplot(df_sum, aes(x = (day), y = traveled_dis, fill = sex)) +
     geom_flat_violin(aes(fill = sex),position = position_nudge(x = .1, y = 0), adjust = 1.5, trim = TRUE, alpha = .5, colour = NA)+
     geom_point(aes(x = as.numeric(day)-.15, y = traveled_dis, colour = sex),position = position_jitter(width = .05), size = 1, shape = 20)+
@@ -240,17 +107,43 @@ function(){
   r = lmer(traveled_dis ~ day * sex + (1|colony/id), data=df_sum)
   Anova(r)
   
+  # pause duration
+  ggplot(df_sum, aes(x = (day), y = pause_duration, fill = sex)) +
+    geom_flat_violin(aes(fill = sex),position = position_nudge(x = .1, y = 0), adjust = 1.5, trim = TRUE, alpha = .5, colour = NA)+
+    geom_point(aes(x = as.numeric(day)-.15, y = pause_duration, colour = sex),position = position_jitter(width = .05), size = 1, shape = 20)+
+    geom_boxplot(aes(x = day, y = pause_duration, fill = sex),outlier.shape = NA, alpha = .5, width = .1, colour = "black")+
+    scale_colour_brewer(palette = "Dark2")+
+    scale_fill_brewer(palette = "Dark2")+
+    scale_y_continuous(limits = c(0,1501))
+  
+  r = lmer(pause_duration ~ day * sex + (1|colony/id), data=df_sum)
+  Anova(r)
+  
+  # mean moving speed
+  ggplot(df_sum, aes(x = (day), y = mean_moving_speed, fill = sex)) +
+    geom_flat_violin(aes(fill = sex),position = position_nudge(x = .1, y = 0), adjust = 1.5, trim = TRUE, alpha = .5, colour = NA)+
+    geom_point(aes(x = as.numeric(day)-.15, y = mean_moving_speed, colour = sex),position = position_jitter(width = .05), size = 1, shape = 20)+
+    geom_boxplot(aes(x = day, y = mean_moving_speed, fill = sex),outlier.shape = NA, alpha = .5, width = .1, colour = "black")+
+    scale_colour_brewer(palette = "Dark2")+
+    scale_fill_brewer(palette = "Dark2")+
+    scale_y_continuous(limits = c(0, 3.5))
+  
   r = lmer(mean_moving_speed ~ day + sex + (1|colony/id), data=df_sum)
   Anova(r)
   
+  # turning patterns
+  ggplot(df_sum, aes(x = (day), y = rho, fill = sex)) +
+    geom_flat_violin(aes(fill = sex),position = position_nudge(x = .1, y = 0), adjust = 1.5, trim = TRUE, alpha = .5, colour = NA)+
+    geom_point(aes(x = as.numeric(day)-.15, y = rho, colour = sex),position = position_jitter(width = .05), size = 1, shape = 20)+
+    geom_boxplot(aes(x = day, y = rho, fill = sex),outlier.shape = NA, alpha = .5, width = .1, colour = "black")+
+    scale_colour_brewer(palette = "Dark2")+
+    scale_fill_brewer(palette = "Dark2")+
+    scale_y_continuous(limits = c(0, 1))
+
   r = lmer(rho ~ day + sex + (1|colony/id), data=df_sum)
   Anova(r)
-  
-  r = lmer(a ~ day + sex + (1|colony/id), data=df_sum)
-  Anova(r)
-  
 }
-
+#------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
 colonyfoundation <- function(){
@@ -287,7 +180,7 @@ colonyfoundation <- function(){
   r <- glmer(offspring~treat+(1|colony), family="poisson", data=d.foundation[d.foundation$foundation>0,])
   Anova(r)
 }
-
+#------------------------------------------------------------------------------#
 
 
 ## tandem observation
