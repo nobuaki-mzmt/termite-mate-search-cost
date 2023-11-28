@@ -1,3 +1,12 @@
+// Data analysis on tired termite project
+// N. Mizumoto
+
+/*------------------------------------------------------------------------------
+ onesim.cpp, 
+ a additional code for simulations.R, 
+ includes functions for calculations
+------------------------------------------------------------------------------*/
+
 #include <Rcpp.h>
 
 using namespace Rcpp;

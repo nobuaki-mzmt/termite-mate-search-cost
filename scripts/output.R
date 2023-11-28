@@ -146,7 +146,7 @@ plot_summary <- function(){
 #------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
-colonyfoundation <- function(){
+plot_colonyfoundation <- function(){
   d.foundation <- data.frame(fread("data/raw/colonyfoundation.csv", header=T))
   
   #table(d.foundation[,c("treat", "foundation")])
@@ -182,31 +182,84 @@ colonyfoundation <- function(){
 }
 #------------------------------------------------------------------------------#
 
+#------------------------------------------------------------------------------#
+plot_weightchange <- function(){
+  d.weight <- data.frame(fread("data/raw/termite_weight.csv", header=T))
+  
+  d.weight <- transform(d.weight, day= factor(day, levels = c("0day", "3day")))
+  d.weight$id <- paste(d.weight$colony, d.weight$sex, d.weight$rep, sep="_")
+  
+  ggplot(d.weight, aes(x=day, y=fresh, fill=sex, col=sex)) +
+    geom_point(position = position_jitterdodge(jitter.width = .05, dodge.width = .5), size=1) +
+    geom_boxplot(aes(x=day, y=fresh),
+                 outlier.shape=NA, alpha=0.3, width=.1, colour="BLACK")+
+    ylab('Fresh weight (mg)')+xlab('')+
+    theme_classic()+
+    scale_fill_viridis(discrete = T, alpha=0.5, direction = -1) +
+    scale_color_viridis(discrete = T, alpha=0.5, direction = -1) +
+    scale_y_continuous(limits=c(0,4)) 
+  
+  r <- lmer(fresh~day*sex+(1|colony/id), data=d.weight)
+  Anova(r)
+}
+#------------------------------------------------------------------------------#
 
-## tandem observation
-tandemmean <- tapply(dt$tandem,dt[,3:2],mean)
-tandemse <- tapply(dt$tandem,dt[,3:2],se)
+#------------------------------------------------------------------------------#
+mate.choice <- function(){
+  # Male, old=19, new=10, NA=6
+  binom.test(c(10,19), p=1/2) 
+  # Female, old=17, new=12, NA=4
+  binom.test(c(12,17), p=1/2) 
+}
+#------------------------------------------------------------------------------#
 
-par(mfrow=c(1,2), pin=c(3,3))
-matplot(tandemmean, type="l",xlim=c(0.5,6.5),ylim=c(0,25),lty=1,las=1,
-        ylab="num. of tandem",xlab="time")
-arrows(rep(1:6,2),as.vector(tandemmean+tandemse),
-       rep(1:6,2),as.vector(tandemmean-tandemse), code=3, angle=90,length=0.1)
-par(new=T)
-matplot(tandemmean, pch=20,xlim=c(0.5,6.5),ylim=c(0,25),ann=F,axes=F)
+#------------------------------------------------------------------------------#
+d.tandem <- data.frame(fread("data/raw/tandem_timedevelopment.csv", header=T))
 
-head(dt)
+d.tandem$day = factor(d.tandem$day)
+d.tandem$minute = factor(d.tandem$minute)
+
+library(Rmisc)
+sumrepdat <- summarySE(d.tandem, measurevar = "tandem", 
+                       groupvars=c("day", "minute"))
+
+ggplot(d.tandem, aes(x=minute, y=tandem, col=day))+
+  geom_point(aes(x = (minute), y = tandem, colour = day),
+             position = position_jitter(width = .05), size = .9, shape = 20)+
+  geom_line(data = sumrepdat, 
+            aes(x = (minute), y = tandem, group = day, colour = day),
+            linetype = 3)+
+  geom_point(data = sumrepdat, 
+             aes(x = (minute), y = tandem, group = day, colour = day),
+             shape = 18) +
+  geom_errorbar(data = sumrepdat, 
+                aes(x = (minute), y = tandem, 
+                    group = day, colour = day, 
+                    ymin = tandem-se, ymax = tandem+se), width = .05)+
+  scale_colour_viridis(discrete = T, end=.9)+
+  scale_fill_viridis(discrete = T)+
+  theme_classic()
+
+library(exactRankTests)
+dt <- d.tandem
 wilcox.exact(dt[dt$minute==30 & dt$day==0,]$tandem, dt[dt$minute==5 & dt$day==0,]$tandem, paired=T)
 # V = 21, p-value = 0.03125
 wilcox.exact(dt[dt$minute==30 & dt$day==3,]$tandem, dt[dt$minute==5 & dt$day==3,]$tandem, paired=T)
 # V = 11, p-value = 1
 
+X <- tapply(dt$tandem, dt[,3:2], sum)
+cor.test(1:6, X[,1], method="spearman")
+# S = 3.5474, p-value = 0.01489
+cor.test(1:6, X[,2], method="spearman")
+# S = 26, p-value = 0.6583
 
-dts_mean <- tapply(dts$obs, dts[,2:3], mean)[,c(2,3,1,6)] 
-dts_se <- tapply(dts$obs, dts[,2:3], se)[,c(2,3,1,6)] 
 
-X <- barplot(dts_mean , beside=T, ylim=c(0,100), las=T)
-arrows(X, dts_mean, X, dts_mean+dts_se, angle=90, length=0.05)
+d.tandem.sum <- data.frame(fread("data/raw/tandem_sum.csv", header=T))
+d.tandem.sum$day <- factor(d.tandem.sum$day)
+dts <- subset(d.tandem.sum, 
+              type=="heterotandem" | type=="maletandem" | type=="femaletandem" | type=="tandem3")
+ggplot(dts, aes(x=type, y=obs, col=day))+
+  geom_boxplot()
 
 wilcox.exact(dts[dts$type=="heterotandem"&dts$day==0,]$obs, dts[dts$type=="heterotandem"&dts$day==3,]$obs, paired=T)
 #V = 0, p-value = 0.03125
@@ -217,73 +270,4 @@ wilcox.exact(dts[dts$type=="femaletandem"&dts$day==0,]$obs, dts[dts$type=="femal
 wilcox.exact(dts[dts$type=="tandem3"&dts$day==0,]$obs, dts[dts$type=="tandem3"&dts$day==3,]$obs, paired=T)
 #V = 0, p-value = 0.03125
 
-wilcox.exact(dts[dts$type=="nestmate"&dts$day==0,]$obs, dts[dts$type=="non-nest"&dts$day==0,]$obs, paired=T)
-# V = 10, p-value = 1
-wilcox.exact(dts[dts$type=="nestmate"&dts$day==3,]$obs, dts[dts$type=="non-nest"&dts$day==3,]$obs, paired=T)
-# V = 8, p-value = 0.6875
-
-
-## ???ԕω?
-X <- tapply(dt$tandem, dt[,3:2], sum)
-cor.test(1:6, X[,1], method="spearman")
-# S = 3.5474, p-value = 0.01489
-cor.test(1:6, X[,2], method="spearman")
-# S = 26, p-value = 0.6583
-
-## ANTAM data
-head(dw)
-
-dmean <- tapply(dw$totalmove/1000, dw[,c(5,3)], mean)
-dse <- tapply(dw$totalmove/1000, dw[,c(5,3)], se)
-
-par(pin=c(3,3), mfrow=c(1,1))
-matplot(dmean, type="l",col=c(2,1),lty=1,xlim=c(0.5,4.5),ylim=c(2,15),ann=F,axes=F)
-arrows(rep(1:4,2),dmean+dse,rep(1:4,2),dmean-dse, angle=90, code =3, length=0.1)
-par(new=T)
-matplot(dmean, col=c(2,1),lty=1,xlim=c(0.5,4.5),ylim=c(2,15),type="p",pch=20,
-        xlab="day", ylab="moved distance (m)",las=1)
-
-r <- lmer(totalmove~day*sex+(1|colony/name),data=dw)
-Anova(r)
-# Analysis of Deviance Table (Type II Wald chisquare tests)
-# Response: totalmove
-# Chisq Df Pr(>Chisq)    
-#  day     89.2541  1    < 2e-16 ***
-#  sex      4.5546  1    0.03283 *  
-#  day:sex  0.3393  1    0.56026    
-
-
-
-## 
-head(d)
-r <- lmer(fresh~as.factor(day)*sex+(1|colony),data=d)
-Anova(r)
-dataMeans <-tapply(d$fresh,d[,3:2],mean)
-datasd <- tapply(d$fresh,d[,3:2],se)
-fugo <- dataMeans / abs(dataMeans)#abs()?͐??Βl
-Col <- gray(seq(0,1,length.out=length(levels(d[,2]))))	#?O???[?X?P?[???ō쐬
-XonFig <- barplot(dataMeans, beside=T, ylim=c(0,3.5), col=Col, family="sans",
-                  xlab="sex", ylab="???d (mg)",las=1)  #?}?����??āA?Ђ????????ׂ??ꏊ???ۊ?
-arrows(XonFig , dataMeans, XonFig , dataMeans+ fugo*datasd, angle=90,length=((XonFig[2,1]-XonFig[1,1])/10)) #?{?b?N?X?̏??ɂ????Ђ?????
-
-
-
-
-r <- glm(suceed~as.factor(treat)+comb,data=d,family=binomial)
-Anova(r)
-
-
-fisher.test(matrix(c(30,0,25,5),ncol=2,byrow=T))
-
-
-
-binom.test(c(10,19), p=1/2) 
-binom.test(c(12,17), p=1/2) 
-binom.test(c(22,36), p=1/2) 
-
-
-
-
-
-head(d)
 
