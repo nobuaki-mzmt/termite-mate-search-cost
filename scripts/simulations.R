@@ -16,10 +16,11 @@
 }
 #------------------------------------------------------------------------------#
 
+rm(list = ls())
+
 #------------------------------------------------------------------------------#
 {
-  rm(list = ls())
-  run.simulation(10000)
+  run.simulation(iter = 10000)
   plot.simulations()
 }
 #------------------------------------------------------------------------------#
@@ -66,6 +67,7 @@ run.simulation <- function(L = 223.6, dis_encounter = 7, iter = 10000){
         y2 <- df2$y + runif(1,0,1)*L
         
         res_vec[i_rep] = one_simulation(x1, y1, x2, y2, L, dis_encounter)
+        #print(res_vec[i_rep])
         
       }
       df_temp <- data.frame(
@@ -73,8 +75,9 @@ run.simulation <- function(L = 223.6, dis_encounter = 7, iter = 10000){
       )
       df_sim <- rbind(df_sim, df_temp)
     }
-    save(df_sim, file="data/df_sim.rda")
   }
+  save(df_sim, file="data/df_sim.rda")
+  
 }
 #------------------------------------------------------------------------------#
 
@@ -82,18 +85,26 @@ run.simulation <- function(L = 223.6, dis_encounter = 7, iter = 10000){
 # output
 #------------------------------------------------------------------------------#
 plot.simulations <- function(){
-  df_sim$cens <- 0
-  df_sim$cens[is.na(df_sim$encounter_time)] <- 1
-  df_sim$encounter_time[is.na(df_sim$encounter_time)] <- 1500
+  load("data/df_sim.rda")
   
+  df_sim$cens <- 0
+  #df_sim$cens[df_sim$encounter_time==1501] <- 1
+  df_sim$cens[df_sim$encounter_time == 1501] <- 1
+  df_sim$encounter_time[df_sim$encounter_time == 1501] <- 3000
   
   df<-survfit(Surv(encounter_time/5)~day, type = "kaplan-meier", data=df_sim)
-  ggsurvplot(fit = df, data = df_sim,
+  ggsurvplot(fit = df, data = df_sim, fun = "event",
              pval = F, pval.method = TRUE,
              risk.table = F, conf.int = FALSE,
              ncensor.plot = FALSE, size = 1, 
-             xlab="Time (sec)", ggtheme = theme_bw()  + theme(aspect.ratio = 0.75),
-             facet.by = "sex")
+             xlab="Time (sec)", 
+             ylab="Encounter rate",
+             palette = viridis(4),
+             ggtheme = theme_classic() + theme(aspect.ratio = 1) +
+               theme(strip.background = element_rect(colour="#00000000", fill="#00000000")),
+             facet.by = "sex") + 
+    coord_cartesian(ylim=c(0,.7), xlim = c(0,300), clip = 'on', expand=FALSE) 
+  ggsave("output/simulation.pdf", width=6, height=3)  
 }
 #------------------------------------------------------------------------------#
 
