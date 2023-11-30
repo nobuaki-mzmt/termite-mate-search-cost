@@ -62,6 +62,22 @@ plot_trajectories <- function(){
                arrow=arrow(ends = "last", angle = 30,length = unit(.2,"cm")))
     
     ggsave(paste0("output/steplength/steplength_",ids[i],".pdf"), width=4, height=4)  
+    
+    # Specific trajectory
+    df_temp <- subset(df_all, id == "Rs_102_M_01")
+    ggplot(df_temp, aes(x=x, y=y, group=day, col=as.factor(day))) +
+      geom_path() +
+      scale_color_viridis(discrete = T, option = "D")+
+      theme(aspect.ratio = 1, legend.position = "none") +
+      ylab("y (mm)") +
+      xlab("x (mm)") +
+      theme_classic()+
+      scale_x_continuous(limit=c(-1200,1200), expand = c(0,0))+
+      scale_y_continuous(limit=c(-1200,1200), expand = c(0,0))+
+      theme(aspect.ratio = 1, legend.position = "bottom")  +
+      theme(legend.position = c(.25,.8))
+    ggsave("output/trajectory_Rs_102_M_01.pdf", width=3, height=3)
+      
   }
   
 }
@@ -75,17 +91,15 @@ plot_MSD <- function(){
   ggplot(df_MSD, aes(x=log10(tau), y=log10(MSD), color=day, fill=day))+
     geom_path(alpha=0.2) + 
     stat_smooth(method = "gam") +
-    #facet_wrap(.~sex) +
     scale_color_viridis(discrete=T)+
     scale_fill_viridis(discrete=T)+
-    #scale_x_log10() + 
-    #scale_y_log10()+
+    coord_cartesian(xlim=c(-0.8,3.2), ylim=c(-1,6))+
     theme_classic()+
-    theme(legend.position = "none") +
-    theme(strip.text = element_text(size = 7, margin = margin()),
-          axis.text=element_text(size=6),)+
-    theme(strip.background = element_rect(colour="#00000000", fill="#00000000"))
-  ggsave("output/MSD.pdf", width=3, height=4)
+    theme(aspect.ratio = 1, legend.position = "none")+
+    xlab("τ (sec)") + ylab("Mean squared displacements")
+    
+  ggsave("output/MSD.pdf", width=3, height=3)
+  
   df_MSD_extract <- df_MSD[df_MSD$tau %in% c(.2,.5,1,2,5,10,20,50,100,200,500,1000), ]
   r <- lmer(log10(MSD)~log10(tau)*day*sex+(1|colony/id), data=df_MSD_extract)
   Anova(r)
@@ -184,29 +198,31 @@ plot_colonyfoundation <- function(){
   d.foundation <- data.frame(fread("data/raw/colonyfoundation.csv", header=T))
   
   #table(d.foundation[,c("treat", "foundation")])
-  d.foundation <- transform(d.foundation, treat= factor(treat, levels = c("3day", "0day")))
+  d.foundation <- transform(d.foundation, treat= factor(treat, levels = c("0day", "3day")))
   
   ggplot(d.foundation, aes(x=treat, y=foundation, fill=treat)) +
     stat_summary(fun = "mean", geom = "bar") +
-    scale_fill_viridis(discrete = T, alpha=0.5, direction = -1) +
+    scale_fill_viridis(discrete = T, alpha=0.5, direction = 1) +
     scale_y_continuous(limits=c(0,1)) + 
     theme_classic()+
-    coord_flip()+
+    theme(legend.position = "none")+
     xlab("")+ylab("Prop of colony foundation success")+
     geom_text(aes(x=2, y=0.5, label = "40/45")) +
     geom_text(aes(x=1, y=0.5, label = "28/39"))
+  ggsave("output/foundation_success.pdf", width=3, height=4)
   
-  ggplot(d.foundation[d.foundation$foundation==1,], aes(x=treat, y=offspring, fill=treat)) +
-    geom_flat_violin(position=position_nudge(x=.15,y=0),adjust =2,trim=TRUE)+
-    geom_point(position = position_jitter(width = .05), size=.4) +
-    geom_boxplot(aes(x=as.numeric(as.factor(treat))+0.15, y=offspring),
-                 outlier.shape=NA, alpha=0.3, width=.1, colour="BLACK")+
+  ggplot(d.foundation[d.foundation$foundation==1,], 
+         aes(x=treat, y=offspring, fill=treat, col=treat)) +
+    geom_point(position = position_jitter(width = .05), size=1) +
+    geom_boxplot(aes(x=as.numeric(as.factor(treat))+0.0, y=offspring),
+                 outlier.shape=NA, alpha=0.3, width=.5, colour="BLACK")+
     ylab('Num offsprings')+xlab('')+
-    coord_flip()+
     theme_classic()+
-    scale_fill_viridis(discrete = T, alpha=0.5, direction = -1) +
+    theme(legend.position = "none")+
+    scale_fill_viridis(discrete = T, alpha=0.5, direction = 1) +
+    scale_color_viridis(discrete = T, alpha=0.5, direction = 1, end=1) +
     scale_y_continuous(limits=c(0,30)) 
-  
+  ggsave("output/foundation_offspring.pdf", width=3, height=4)
   
   r <- glmer(foundation~treat+(1|colony), family="binomial", data=d.foundation)
   Anova(r)
