@@ -1,6 +1,8 @@
-**Mate search costs discount the choosiness in termite tandem paring**
+**Wasted efforts impair random search efficiency and reduce the level of
+choosiness in mate-pairing termites.**
 
-**Nobuaki Mizumoto<sup>1,2\*</sup>, Naohisa Nagaya, Ryusuke Fujisawa**
+**Nobuaki Mizumoto<sup>1,2,3,4\*</sup>, Naohisa Nagaya, Ryusuke
+Fujisawa**
 
 **Affiliations:**
 
@@ -10,7 +12,11 @@ Technology Graduate University, Onna-son, Okinawa, Japan
 2\. Computational Neuroethology Unit, Okinawa Institute of Science &
 Technology Graduate University, Onna-son, Okinawa, Japan
 
-3. 
+3. Department of Entomology and Plant Pathology, Auburn University,
+Auburn, AL, USA
+
+4\. Laboratory of Insect Ecology, Graduate School of Agriculture, Kyoto
+University, Kyoto, Japan
 
 \*. Author correspondence:
 [<span class="underline">nobuaki.mzmt@gmail.com</span>](mailto:nobuaki.mzmt@gmail.com)
@@ -19,18 +25,30 @@ ORCID, N.M.: 0000-0002-6731-8684;
 
 **Abstract**
 
-Animals need to move to find a mating partner. The mate search is cost.
-However, the cost of mate search is not studied. In termites, mate
-search can happen in a very short period, and extended search incurs a
-lot of costs. Here we quantified the cost of mate search in termites.
-According to time, traveled distance of termites decreased. Furthermore,
-termites that engaged in mate search for three days had lower colony
-foundation success and small number of offspring. Furthermore, we found
-that the termite engaged in mate search for three days discounted their
-mate partner selection. They often form tandem pairs even with the
-same-sex partners.
+Random search theories predict that animals employ movement patterns
+that optimize encounter rates with target resources. However, animals
+are not always able to achieve the optimal random search. Energy
+depletion, for example, limits searchers’ movement activities, forcing
+them to adjust their behaviors before and after the encounters. Here we
+quantified the cost of mate search in a termite, *Reticulitermes
+speratus*, and revealed that the cost reduces the selectivity of mating
+partners. After a dispersal flight, termites keep searching for a mating
+partner; otherwise, they die. We found that their movement activity and
+diffusiveness progressively declined over observational days. Our
+data-based simulations qualitatively confirmed that this reduced
+movement diffusiveness decreased the searching efficiency. Also,
+termites with prolonged search periods had lower colony foundation
+success and fewer offspring. Thus, mate search imposes doubled costs on
+termites. Finally, we found that termites with an extended mate search
+reduced the selectivity of mating partners, where males immediately
+paired with any encountering females and even frequently exhibited
+same-sex pairing. Thus, termites dramatically changed their mate search
+behavior depending on their physiological conditions. It is essential to
+account for the searchers’ internal states to fill the gap between
+random search theories and empirical behavioral observations.
 
-**Keywords**
+**Keywords:** Random walk; Tandem runs; Sexual selection; Social
+insects; Movement ecology
 
 **Introduction**
 
@@ -46,6 +64,15 @@ has a strong influence on the subsequent decision. However, the
 relationships between moving patterns and mate choice remains totally
 unknown.
 
+However, animals cannot always achieve the movement patterns
+
+However, in random search theories, indigenous conditions of searching
+agents have rarely been taken into account. This limits the connectivity
+between theories of random search and empirical observations of animal
+searching behaviors.
+
+To fill this gap,
+
 Reticulitermes. Termites are ideal system to study this. During certain
 season of the year, alates fly to disperse for mating. After dispersal,
 termites shed their wings and walk to search for mating partners.
@@ -60,6 +87,240 @@ Movement patterns. Diffusiveness is important parameters. Pausing is
 too. All of them can be obtained using servosphere.
 
 In this study
+
+**Results **
+
+**Change of searching activity over time**
+
+**探索時間の経過に伴い、各個体の探索距離は有意に減少した（GLMM, LRT, day: χ2**
+
+**1 = 89.2541, P \< 0.0001, 図
+9-2）。また性間でも探索距離に有意な違いが見られ、メスの方が長い距離歩行した（GLMM,
+LRT, sex: χ21 = 4.5546, P = 0.03283, 図
+9-2B）。一方で、時間に伴う探索距離の変化の傾向は、性間で違いが見られなかった（GLMM,
+LRT, sex:day: χ21 = 0.3393, P = 0.56026, 図 9-2B）。**
+
+![A screenshot of a computer Description automatically
+generated](media/image1.png)
+
+> **Figure 1.** Change of movement patterns according to extended mate
+> search in a termite *Reticulitermes speratus*. (A) Overview of the
+> mating biology and experimental setup. After swarming flights,
+> termites shed their wings and walk to search for a partner. After
+> successful encounter, they form a tandem running pair and found a
+> colony. Mate search usually ends in a day, otherwise it can last until
+> they find a partner. We observed their movement patterns every 24
+> hours for 30 minutes over 4 days (day 0-3). (B) Representative
+> trajectories of a termite. Each trajectory corresponds to 25 minutes,
+> where a termite moved less and less distances across days. (C-D)
+> Comparison of traveled distances (C) and pausing duration (D) of
+> termites across days after swarming. Bars indicate mean ± s.e. (E)
+> Mean squared displacements (MSD) of the trajectories on the
+> servosphere across days after swarming. Thick lines indicate mean for
+> each day’s observations, where data of females and males were pooled.
+> (F) Simulation results for comparing searching efficiencies of
+> movement patterns observed in termites across days after swarming (*L*
+> = 223.6, φ = 7). The results were obtained from means of 100,000
+> simulations.
+
+**Fitness cost of extended mate starch**
+
+**We found that extended mating search incurs the cost on colony
+foundation success. The colony foundation success was significantly
+reduced in 3 days extended search individuals than fresh
+individuals（GLMM, LRT, sex: χ21 = 4.0153, P = 0.04509, 図 9-3A). Also
+the number of offspring is smaller in extended searching
+individuals（GLMM, LRT, sex: χ2**
+
+**1 = 4.1447, P = 0.04176, 図 9-3B）.**
+
+![](media/image2.png)
+
+> **Figure 2.** Comparison of colony foundation success between alates
+> just after swarming and after 3 days mate search.
+
+**更に、3 日間探索を経験した個体では、タンデム行動にも変化があった。異性ペアのタンデムの観察数は、群飛直後と比べ、3
+日探索後では有意に大きくなった（Wilcoxon Signed rank test, V =
+0, P = 0.03125; 図 9-4B）。また 3 個体以上のタンデムの数もまた有意に大きくなった（Wilcoxon signed
+rank test, V = 0, P = 0.03125; 図 9-4B）。3 個体以上のタンデムはそのほとんどは、メス 1 個体に対しオス
+2 個体が追いかけているものであった**
+
+**（84/95; 88.4%）。一方、オス同士やメス同士の同性タンデムの数は、3 日間の探索の前**
+
+**後で変化はなかった（Wilcoxon signed rank test, male: V = 14, P = 0.5625; female:
+V = 1.5, P**
+
+**= 0.375; 図 9-4B）。これらのタンデムペアの組み合わせは、群飛直後、3 日探索後とも**
+
+**にネストメイトか非ネストメイトかは関係がなかった（Wilcoxon signed rank test, 0 day: **
+
+**V = 10, P = 1; 3 day: V = 8, P = 0.6875）。また群飛直後の個体では、時間の経過に伴って**
+
+**観測されるタンデムの数が増加したが（Spearman’s rank correlation, S = 3.5474, P = **
+
+**0.01489; 図 9-4A）、3 日間探索では増加の傾向はなかった（Spearman’s rank correlation, S**
+
+**= 26, P = 0.6583; 図 9-4A）。**
+
+In total, we observed 166 heterosexual tandem runs (76 with nestmates
+and 90 with non-
+
+nestmates), 36 male-male tandem runs (seven with nestmates and 29 with
+non-nestmates), one
+
+female-female tandem run (with non-nestmates), and 16 tandems with \>3
+individuals. We found no
+
+significant differences in the number of tandem runs between nestmate
+and non-nestmates in
+
+heterosexual tandems (GLM with Poisson distribution, χ21 = 1.182, P =
+0.277), while non-nestmate
+
+tandems were more frequent than nestmate tandems in male-male tandems
+(GLM with Poisson
+
+distribution, χ21 = 14.439, P \< 0.001, effect size: non-nestmate -
+nestmate = 2.035).
+
+These results show the followings. First, there was no clear inbreeding
+avoidance in R. speratus
+
+heterosexual pairing. Second, we found more non-nestmate tandems than
+nestmate tandems in
+
+male-male pairing, and thus our results in the main text (and Fig. S2)
+may underestimate the
+
+stability of male-male tandem runs. Males of male-male tandems compete
+over the follower
+
+positions (Video S1), and the larger male generally wins (1). In
+non-nestmate male-male pairing,
+
+the body size difference between partners is greater than in nestmate
+male-male pairing.
+
+Differences in body size may facilitate the stability of same-sex tandem
+runs in males, which should
+
+be confirmed in future studies. Finally, female-female tandem is much
+rarer than ma
+
+![](media/image3.png)
+
+> **Figure 3. **
+
+**Discussion**
+
+本研究で、シロアリが単独で配偶者相手を探す行動には、適応度上のコストが存在
+
+することが明らかとなった。まず探索する時間が長くなれば長くなるほど、歩行する距
+
+離が減少した（図 9-2）。相手がどこにいるか全く分からないランダム探索の状況では
+
+（第 4 章における完全ランダム探索の状況）、可能な限り早く、また直進的に動くこと
+
+が遭遇効率を上昇させる上で重要な要因となる (James et al. 2008)。そのため、シロアリ
+
+が探索する時間が長くなればなるほど、移動能力が下がることは、探索効率の減少につ
+
+ながる。群飛したシロアリは、巣にいたときに蓄えた脂肪の貯蓄のみを用いてその後の
+
+行動を行い、コロニー創設をしワーカーが生じるまでは外からエネルギーを得ることは
+
+ない (Vargo and Husseneder 2009)。そのため、このような移動量の減少は、探索にかか
+
+るエネルギーのコストによって引き起こされた可能性がある (Wickman and Jansson
+
+1997)。さらにこの探索にかかるエネルギーの消費は、その後のコロニー創設の成功に
+
+も大きな影響を与えることも明らかとなった（図 9-3）。このように、通常は社会性で集
+
+団の中に生きるシロアリにとって、単独で他個体を探索するという行動が長引くことは、
+
+大きな適応度上のコストである。
+
+このような探索にかかる適応度上のコストは、配偶者選択に大きな影響を与えた。
+
+アリーナ内でタンデム行動の観察を行ったところ、群飛直後の個体と比べ、3 日間探索
+
+した個体では、多くのタンデム歩行が見られた（図 9-4）。また 2 個体のオスが 1 個体の
+
+メスを巡って争う 3 個体以上のタンデムも多く観察できた（図 9-4）。このような配偶者
+
+選択の変化は、複数回交尾をよく行う種でもみられ、メスによるオスの配偶者選択が行
+
+われる種において、この時メスの残り寿命が短い (Wilson et al. 2010; Wilgers and Hebets
+
+2012)、オスの密度が低い (Alatalo et al. 1988)、繁殖可能な期間が短い (Gotthard et al.
+
+1999)などにより、探索にかかるコストが大きくなる場合には、メスの選り好みが緩和
+
+されることが知られている。本研究では、このような探索コストを被ることに伴う配偶
+
+者選択の緩和が、一夫一妻の種において見られることを示した。これはシロアリの配偶
+
+者選択においても性選択が重要な役割を果たしていることを示唆する。
+
+タンデム行動の観測数の時間変化においても、群飛直後と 3 日間の探索後で大きな
+
+違いが見られた。群飛直後の個体では、観察時間の経過に伴って観測されるタンデムの
+
+数が増加した一方、3 日経過ではそのような増加は見られず、最初からタンデムの観測
+
+数は多かった（図 9-4）。これは次の様に解釈できる。群飛直後のオスは、まだ自身の探
+
+索行動に余裕があるため、複数のメスを評価してから質の高いメスを選択する。一方で、
+
+3 日間探索したオスは、自身の探索行動に余裕がないため、質にかかわらず出会ったメ
+
+スを選択する。というものである。このような現象は、最適停止問題の 1 つであるおみ
+
+あい問題（秘書問題）を適用することで統合的に理解できるだろう。おみあい問題では、
+
+N 人と順番にお見合いするとして、何人目の相手と交際すると最も好みである人と交際
+
+できるかを考える問題である (Ferguson 1989)。この解は k = n/e 人目までを無条件で断
+
+り、それ以降で一番条件の良いパートナーで選ぶものである。群飛直後は、これからま
+
+だ多くの相手と出会うことがあできると予測されるまで、k が大きな値となり、初期に
+
+はタンデムを行わず相手を評価するだけである。そして、出会った個体の数が増えてく
+
+ると、タンデムを行うことを決め始める個体が出てくるため、時間の経過に応じてタン
+
+デムの数は増加する。一方で、3 日間他個体と出会うことができなかった個体にとって
+
+は、k はかなり小さい値となる。そのため、無条件で断ることがなくなり、初期段階か
+
+ら多くのタンデム行動がみられる。このようにシロアリは、配偶者探索における
+
+Sequential choice model の実証に適した材料である (Real 1990; Real 1991)。
+
+探索効率の最適化について、空間的、時間的な最適戦略を探る研究では、本章で検
+
+討したような個体の状態が考慮されることはほとんどない。本研究で示した、探索活動
+
+を行うことそのものが、活動量やその後の配偶者選択にも影響を及ぼすという視点を組
+
+み合わせると、生物の移動パターンの進化についてより深い議論が可能になるだろう
+
+Cross species variation. Some species should be less choosy. While
+others can be somewhat choosy. However, everything could be secondary
+because most important is to make a pair. This, it is surprising that
+termites might refrain pairing with a partner for the first several
+minutes. This indicates choosing better partners could provide enough
+strong advantages for colony foundation success. Not that several
+studies show that termites with some characters are strong candidate of
+mating pairs, larger body size, without leaking body parts, microbial
+community, heterozygosity, and so on. However, it is questionable how
+termites can distinguish these partners, given that they even do not
+care the species of their partners. Their interindividual interactions
+are mostly limited in touching with antenna. Passive selection, e.g.,
+strong candidate are better at tandem run, may be a cause of assistive
+mating, rather than active mate choice.
 
 **Material and Methods**
 
@@ -188,208 +449,6 @@ developments of the number of observed tandem running pairs.
 All analysis were performed by R v4.3.1 with libraries of
 “exactRankTests”、 “lme4”、”car”.
 
-**Results **
-
-**Change of searching activity over time**
-
-**探索時間の経過に伴い、各個体の探索距離は有意に減少した（GLMM, LRT, day: χ2**
-
-**1 = 89.2541, P \< 0.0001, 図
-9-2）。また性間でも探索距離に有意な違いが見られ、メスの方が長い距離歩行した（GLMM,
-LRT, sex: χ21 = 4.5546, P = 0.03283, 図
-9-2B）。一方で、時間に伴う探索距離の変化の傾向は、性間で違いが見られなかった（GLMM,
-LRT, sex:day: χ21 = 0.3393, P = 0.56026, 図 9-2B）。**
-
-**Fitness cost of extended mate starch**
-
-**We found that extended mating search incurs the cost on colony
-foundation success. The colony foundation success was significantly
-reduced in 3 days extended search individuals than fresh
-individuals（GLMM, LRT, sex: χ21 = 4.0153, P = 0.04509, 図 9-3A). Also
-the number of offspring is smaller in extended searching
-individuals（GLMM, LRT, sex: χ2**
-
-**1 = 4.1447, P = 0.04176, 図 9-3B）.**
-
-**更に、3 日間探索を経験した個体では、タンデム行動にも変化があった。異性ペアのタンデムの観察数は、群飛直後と比べ、3
-日探索後では有意に大きくなった（Wilcoxon Signed rank test, V =
-0, P = 0.03125; 図 9-4B）。また 3 個体以上のタンデムの数もまた有意に大きくなった（Wilcoxon signed
-rank test, V = 0, P = 0.03125; 図 9-4B）。3 個体以上のタンデムはそのほとんどは、メス 1 個体に対しオス
-2 個体が追いかけているものであった**
-
-**（84/95; 88.4%）。一方、オス同士やメス同士の同性タンデムの数は、3 日間の探索の前**
-
-**後で変化はなかった（Wilcoxon signed rank test, male: V = 14, P = 0.5625; female:
-V = 1.5, P**
-
-**= 0.375; 図 9-4B）。これらのタンデムペアの組み合わせは、群飛直後、3 日探索後とも**
-
-**にネストメイトか非ネストメイトかは関係がなかった（Wilcoxon signed rank test, 0 day: **
-
-**V = 10, P = 1; 3 day: V = 8, P = 0.6875）。また群飛直後の個体では、時間の経過に伴って**
-
-**観測されるタンデムの数が増加したが（Spearman’s rank correlation, S = 3.5474, P = **
-
-**0.01489; 図 9-4A）、3 日間探索では増加の傾向はなかった（Spearman’s rank correlation, S**
-
-**= 26, P = 0.6583; 図 9-4A）。**
-
-In total, we observed 166 heterosexual tandem runs (76 with nestmates
-and 90 with non-
-
-nestmates), 36 male-male tandem runs (seven with nestmates and 29 with
-non-nestmates), one
-
-female-female tandem run (with non-nestmates), and 16 tandems with \>3
-individuals. We found no
-
-significant differences in the number of tandem runs between nestmate
-and non-nestmates in
-
-heterosexual tandems (GLM with Poisson distribution, χ21 = 1.182, P =
-0.277), while non-nestmate
-
-tandems were more frequent than nestmate tandems in male-male tandems
-(GLM with Poisson
-
-distribution, χ21 = 14.439, P \< 0.001, effect size: non-nestmate -
-nestmate = 2.035).
-
-These results show the followings. First, there was no clear inbreeding
-avoidance in R. speratus
-
-heterosexual pairing. Second, we found more non-nestmate tandems than
-nestmate tandems in
-
-male-male pairing, and thus our results in the main text (and Fig. S2)
-may underestimate the
-
-stability of male-male tandem runs. Males of male-male tandems compete
-over the follower
-
-positions (Video S1), and the larger male generally wins (1). In
-non-nestmate male-male pairing,
-
-the body size difference between partners is greater than in nestmate
-male-male pairing.
-
-Differences in body size may facilitate the stability of same-sex tandem
-runs in males, which should
-
-be confirmed in future studies. Finally, female-female tandem is much
-rarer than ma
-
-**Discussion**
-
-本研究で、シロアリが単独で配偶者相手を探す行動には、適応度上のコストが存在
-
-することが明らかとなった。まず探索する時間が長くなれば長くなるほど、歩行する距
-
-離が減少した（図 9-2）。相手がどこにいるか全く分からないランダム探索の状況では
-
-（第 4 章における完全ランダム探索の状況）、可能な限り早く、また直進的に動くこと
-
-が遭遇効率を上昇させる上で重要な要因となる (James et al. 2008)。そのため、シロアリ
-
-が探索する時間が長くなればなるほど、移動能力が下がることは、探索効率の減少につ
-
-ながる。群飛したシロアリは、巣にいたときに蓄えた脂肪の貯蓄のみを用いてその後の
-
-行動を行い、コロニー創設をしワーカーが生じるまでは外からエネルギーを得ることは
-
-ない (Vargo and Husseneder 2009)。そのため、このような移動量の減少は、探索にかか
-
-るエネルギーのコストによって引き起こされた可能性がある (Wickman and Jansson
-
-1997)。さらにこの探索にかかるエネルギーの消費は、その後のコロニー創設の成功に
-
-も大きな影響を与えることも明らかとなった（図 9-3）。このように、通常は社会性で集
-
-団の中に生きるシロアリにとって、単独で他個体を探索するという行動が長引くことは、
-
-大きな適応度上のコストである。
-
-このような探索にかかる適応度上のコストは、配偶者選択に大きな影響を与えた。
-
-アリーナ内でタンデム行動の観察を行ったところ、群飛直後の個体と比べ、3 日間探索
-
-した個体では、多くのタンデム歩行が見られた（図 9-4）。また 2 個体のオスが 1 個体の
-
-メスを巡って争う 3 個体以上のタンデムも多く観察できた（図 9-4）。このような配偶者
-
-選択の変化は、複数回交尾をよく行う種でもみられ、メスによるオスの配偶者選択が行
-
-われる種において、この時メスの残り寿命が短い (Wilson et al. 2010; Wilgers and Hebets
-
-2012)、オスの密度が低い (Alatalo et al. 1988)、繁殖可能な期間が短い (Gotthard et al.
-
-1999)などにより、探索にかかるコストが大きくなる場合には、メスの選り好みが緩和
-
-されることが知られている。本研究では、このような探索コストを被ることに伴う配偶
-
-者選択の緩和が、一夫一妻の種において見られることを示した。これはシロアリの配偶
-
-者選択においても性選択が重要な役割を果たしていることを示唆する。
-
-タンデム行動の観測数の時間変化においても、群飛直後と 3 日間の探索後で大きな
-
-違いが見られた。群飛直後の個体では、観察時間の経過に伴って観測されるタンデムの
-
-数が増加した一方、3 日経過ではそのような増加は見られず、最初からタンデムの観測
-
-数は多かった（図 9-4）。これは次の様に解釈できる。群飛直後のオスは、まだ自身の探
-
-索行動に余裕があるため、複数のメスを評価してから質の高いメスを選択する。一方で、
-
-3 日間探索したオスは、自身の探索行動に余裕がないため、質にかかわらず出会ったメ
-
-スを選択する。というものである。このような現象は、最適停止問題の 1 つであるおみ
-
-あい問題（秘書問題）を適用することで統合的に理解できるだろう。おみあい問題では、
-
-N 人と順番にお見合いするとして、何人目の相手と交際すると最も好みである人と交際
-
-できるかを考える問題である (Ferguson 1989)。この解は k = n/e 人目までを無条件で断
-
-り、それ以降で一番条件の良いパートナーで選ぶものである。群飛直後は、これからま
-
-だ多くの相手と出会うことがあできると予測されるまで、k が大きな値となり、初期に
-
-はタンデムを行わず相手を評価するだけである。そして、出会った個体の数が増えてく
-
-ると、タンデムを行うことを決め始める個体が出てくるため、時間の経過に応じてタン
-
-デムの数は増加する。一方で、3 日間他個体と出会うことができなかった個体にとって
-
-は、k はかなり小さい値となる。そのため、無条件で断ることがなくなり、初期段階か
-
-ら多くのタンデム行動がみられる。このようにシロアリは、配偶者探索における
-
-Sequential choice model の実証に適した材料である (Real 1990; Real 1991)。
-
-探索効率の最適化について、空間的、時間的な最適戦略を探る研究では、本章で検
-
-討したような個体の状態が考慮されることはほとんどない。本研究で示した、探索活動
-
-を行うことそのものが、活動量やその後の配偶者選択にも影響を及ぼすという視点を組
-
-み合わせると、生物の移動パターンの進化についてより深い議論が可能になるだろう
-
-Cross species variation. Some species should be less choosy. While
-others can be somewhat choosy. However, everything could be secondary
-because most important is to make a pair. This, it is surprising that
-termites might refrain pairing with a partner for the first several
-minutes. This indicates choosing better partners could provide enough
-strong advantages for colony foundation success. Not that several
-studies show that termites with some characters are strong candidate of
-mating pairs, larger body size, without leaking body parts, microbial
-community, heterozygosity, and so on. However, it is questionable how
-termites can distinguish these partners, given that they even do not
-care the species of their partners. Their interindividual interactions
-are mostly limited in touching with antenna. Passive selection, e.g.,
-strong candidate are better at tandem run, may be a cause of assistive
-mating, rather than active mate choice.
-
 **Acknowledgments**
 
 This study was supported by Grants-in-Aid for JSPS Research Fellow
@@ -398,3 +457,21 @@ This study was supported by Grants-in-Aid for JSPS Research Fellow
 **References**
 
 **Supplemental materials **
+
+**Figure S1**. Trajectories on the servosphere of all observed
+individuals.
+
+**Figure S2.** Observational arena for tandem pairing.
+
+![](media/image4.png)
+
+> **Figure S1**. Trajectories on the servosphere of all observed
+> individuals. Each label indicates Species name (Rs = *Reticulitermes
+> speratus*) + Colony name + Sex + Replicates.
+
+![](media/image5.png)
+
+> **Figure S2.** Observational arena for tandem pairing. A video camera
+> was located above the observation area on a tripod. Termites were
+> released at the center of the arena, and those who crossed the
+> observation area were observed.

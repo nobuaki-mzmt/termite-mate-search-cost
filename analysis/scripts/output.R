@@ -13,6 +13,7 @@
   
   library(lme4)
   library(car)
+  library(exactRankTests)
   
   library(Rmisc)
   
@@ -221,7 +222,10 @@ plot_colonyfoundation <- function(){
     theme(legend.position = "none")+
     scale_fill_viridis(discrete = T, alpha=0.5, direction = 1) +
     scale_color_viridis(discrete = T, alpha=0.5, direction = 1, end=1) +
-    scale_y_continuous(limits=c(0,30)) 
+    scale_y_continuous(limits=c(0,30)) + 
+    theme(axis.text = element_text(size = 7),
+          axis.title = element_text(size = 9),
+          legend.position = "none")
   ggsave("output/foundation_offspring.pdf", width=3, height=4)
   
   r <- glmer(foundation~treat+(1|colony), family="binomial", data=d.foundation)
@@ -239,15 +243,19 @@ plot_weightchange <- function(){
   d.weight <- transform(d.weight, day= factor(day, levels = c("0day", "3day")))
   d.weight$id <- paste(d.weight$colony, d.weight$sex, d.weight$rep, sep="_")
   
-  ggplot(d.weight, aes(x=day, y=fresh, fill=sex, col=sex)) +
-    geom_point(position = position_jitterdodge(jitter.width = .05, dodge.width = .5), size=1) +
-    geom_boxplot(aes(x=day, y=fresh),
-                 outlier.shape=NA, alpha=0.3, width=.1, colour="BLACK")+
+  ggplot(d.weight, aes(x=sex, y=fresh, fill=day, col=day)) +
+    geom_point(position = position_jitterdodge(jitter.width = .05, dodge.width = .8), size=1) +
+    geom_boxplot(outlier.shape=NA, alpha=0.3, width=.8, colour="BLACK")+
     ylab('Fresh weight (mg)')+xlab('')+
     theme_classic()+
     scale_fill_viridis(discrete = T, alpha=0.5, direction = -1) +
     scale_color_viridis(discrete = T, alpha=0.5, direction = -1) +
-    scale_y_continuous(limits=c(0,4)) 
+    scale_y_continuous(limits=c(0,4)) +
+    theme(legend.position = "none")+ 
+    theme(axis.text = element_text(size = 7),
+          axis.title = element_text(size = 9),
+          legend.position = "none")
+  ggsave("output/fresh_weight.pdf", width=3, height=3)
   
   r <- lmer(fresh~day*sex+(1|colony/id), data=d.weight)
   Anova(r)
@@ -260,63 +268,112 @@ mate.choice <- function(){
   binom.test(c(10,19), p=1/2) 
   # Female, old=17, new=12, NA=4
   binom.test(c(12,17), p=1/2) 
+  
+  df_temp = data.frame(
+    win = c(rep("old",19),rep("new",10),rep("old",17),rep("new",12)),
+    sex = c(rep("male",29), rep("female", 29))
+  )
+  
+  ggplot(df_temp, aes(x=sex, fill=factor(win))) +
+    geom_bar(position = "fill") +
+    scale_fill_viridis(discrete = T, option = "E", end=.5)+
+    theme_classic()+
+    xlab("") + ylab("Proportion")+
+    theme(legend.position = "none")+ 
+    theme(axis.text = element_text(size = 7),
+          axis.title = element_text(size = 9),
+          legend.position = "none")
+  ggsave("output/mate_choice.pdf", width = 3, height=3)
 }
 #------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
-d.tandem <- data.frame(fread("data/raw/tandem_timedevelopment.csv", header=T))
-
-d.tandem$day = factor(d.tandem$day)
-d.tandem$minute = factor(d.tandem$minute)
-
-sumrepdat <- summarySE(d.tandem, measurevar = "tandem", 
-                       groupvars=c("day", "minute"))
-
-ggplot(d.tandem, aes(x=minute, y=tandem, col=day))+
-  geom_point(aes(x = (minute), y = tandem, colour = day),
-             position = position_jitter(width = .05), size = .9, shape = 20)+
-  geom_line(data = sumrepdat, 
-            aes(x = (minute), y = tandem, group = day, colour = day),
-            linetype = 3)+
-  geom_point(data = sumrepdat, 
-             aes(x = (minute), y = tandem, group = day, colour = day),
-             shape = 18) +
-  geom_errorbar(data = sumrepdat, 
-                aes(x = (minute), y = tandem, 
-                    group = day, colour = day, 
-                    ymin = tandem-se, ymax = tandem+se), width = .05)+
-  scale_colour_viridis(discrete = T, end=.9)+
-  scale_fill_viridis(discrete = T)+
-  theme_classic()
-
-library(exactRankTests)
-dt <- d.tandem
-wilcox.exact(dt[dt$minute==30 & dt$day==0,]$tandem, dt[dt$minute==5 & dt$day==0,]$tandem, paired=T)
-# V = 21, p-value = 0.03125
-wilcox.exact(dt[dt$minute==30 & dt$day==3,]$tandem, dt[dt$minute==5 & dt$day==3,]$tandem, paired=T)
-# V = 11, p-value = 1
-
-X <- tapply(dt$tandem, dt[,3:2], sum)
-cor.test(1:6, X[,1], method="spearman")
-# S = 3.5474, p-value = 0.01489
-cor.test(1:6, X[,2], method="spearman")
-# S = 26, p-value = 0.6583
-
-
-d.tandem.sum <- data.frame(fread("data/raw/tandem_sum.csv", header=T))
-d.tandem.sum$day <- factor(d.tandem.sum$day)
-dts <- subset(d.tandem.sum, 
-              type=="heterotandem" | type=="maletandem" | type=="femaletandem" | type=="tandem3")
-ggplot(dts, aes(x=type, y=obs, col=day))+
-  geom_boxplot()
-
-wilcox.exact(dts[dts$type=="heterotandem"&dts$day==0,]$obs, dts[dts$type=="heterotandem"&dts$day==3,]$obs, paired=T)
-#V = 0, p-value = 0.03125
-wilcox.exact(dts[dts$type=="maletandem"&dts$day==0,]$obs, dts[dts$type=="maletandem"&dts$day==3,]$obs, paired=T)
-#V = 14, p-value = 0.5625
-wilcox.exact(dts[dts$type=="femaletandem"&dts$day==0,]$obs, dts[dts$type=="femaletandem"&dts$day==3,]$obs, paired=T)
-#V = 1.5, p-value = 0.375
-wilcox.exact(dts[dts$type=="tandem3"&dts$day==0,]$obs, dts[dts$type=="tandem3"&dts$day==3,]$obs, paired=T)
-#V = 0, p-value = 0.03125
-
+tandem_plot <- function(){
+  
+  d.tandem <- data.frame(fread("data/raw/tandem_timedevelopment.csv", header=T))
+  
+  d.tandem$day = factor(d.tandem$day)
+  d.tandem$minute = factor(d.tandem$minute)
+  
+  sumrepdat <- summarySE(d.tandem, measurevar = "tandem", 
+                         groupvars=c("day", "minute"))
+  
+  ggplot(d.tandem, aes(x=minute, y=tandem, col=day))+
+    geom_point(aes(x = (minute), y = tandem, colour = day),
+               position = position_jitter(width = .05),
+               alpha=.5, size = .5, shape = 20)+
+    geom_line(data = sumrepdat, 
+              aes(x = (minute), y = tandem, group = day, colour = day),
+              linetype = 3)+
+    geom_point(data = sumrepdat, 
+               aes(x = (minute), y = tandem, group = day, colour = day),
+               shape = 18, size=1.2) +
+    geom_errorbar(data = sumrepdat, 
+                  aes(x = (minute), y = tandem, 
+                      group = day, colour = day, 
+                      ymin = tandem-se, ymax = tandem+se),
+                  width = .1)+
+    scale_colour_viridis(discrete = T, end=.9)+
+    scale_fill_viridis(discrete = T)+
+    theme_classic()+
+    theme(legend.position = "none")+
+    xlab("Observation windows (min)") + ylab("Number of tandem runs")+
+    scale_x_discrete(labels=c("5" = "0-5", "10" = "5-10", 
+                              "15" = "10-15", "20" = "15-20",
+                              "25" = "20-25", "30" = "25-30"))+ 
+    theme(axis.text = element_text(size = 7),
+          axis.title = element_text(size = 9),
+          legend.position = "none")
+  ggsave("output/tandem_development.pdf", width=3.6, height=3)
+  
+  dt <- d.tandem
+  wilcox.exact(dt[dt$minute==30 & dt$day==0,]$tandem, 
+               dt[dt$minute==5 & dt$day==0,]$tandem, paired=T)
+  # V = 21, p-value = 0.03125
+  wilcox.exact(dt[dt$minute==30 & dt$day==3,]$tandem, 
+               dt[dt$minute==5 & dt$day==3,]$tandem, paired=T)
+  # V = 11, p-value = 1
+  
+  X <- tapply(dt$tandem, dt[,3:2], sum)
+  cor.test(1:6, X[,1], method="spearman")
+  # S = 3.5474, p-value = 0.01489
+  cor.test(1:6, X[,2], method="spearman")
+  # S = 26, p-value = 0.6583
+  
+  
+  d.tandem.sum <- data.frame(fread("data/raw/tandem_sum.csv", header=T))
+  d.tandem.sum$day <- factor(d.tandem.sum$day)
+  dts <- subset(d.tandem.sum, 
+                type=="heterotandem" | type=="femaletandem" | type=="maletandem" | type=="tandem3")
+  dts$type = factor(dts$type, levels = c("heterotandem", "maletandem", "femaletandem", "tandem3"))
+  ggplot(dts, aes(x=type, y=obs, fill=day, col=day))+
+    geom_point(position = position_jitterdodge(jitter.width = .2, dodge.width = .75), size=1) +
+    geom_boxplot(outlier.shape=NA, alpha=0.3, width=.75, colour="BLACK")+
+    scale_fill_viridis(discrete = T)+
+    scale_color_viridis(discrete = T)+
+    theme_classic()+
+    scale_x_discrete(labels=c("heterotandem" = "Female-Male",
+                              "femaletandem" = "Female-Female", 
+                              "maletandem" = "Male-Male",
+                              "tandem3" = "> 2 individuals"))+
+    xlab("")+ylab("Number of observations")+ 
+    theme(axis.text = element_text(size = 7),
+          axis.title = element_text(size = 9),
+          legend.position = "none")
+  ggsave("output/tandem_total.pdf", width=3.6, height=3)
+    
+  
+  wilcox.exact(dts[dts$type=="heterotandem"&dts$day==0,]$obs, 
+               dts[dts$type=="heterotandem"&dts$day==3,]$obs, paired=T)
+  #V = 0, p-value = 0.03125
+  wilcox.exact(dts[dts$type=="maletandem"&dts$day==0,]$obs, 
+               dts[dts$type=="maletandem"&dts$day==3,]$obs, paired=T)
+  #V = 14, p-value = 0.5625
+  wilcox.exact(dts[dts$type=="femaletandem"&dts$day==0,]$obs,
+               dts[dts$type=="femaletandem"&dts$day==3,]$obs, paired=T)
+  #V = 1.5, p-value = 0.375
+  wilcox.exact(dts[dts$type=="tandem3"&dts$day==0,]$obs, 
+               dts[dts$type=="tandem3"&dts$day==3,]$obs, paired=T)
+  #V = 0, p-value = 0.03125
+}
 
