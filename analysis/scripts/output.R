@@ -244,18 +244,20 @@ plot_weightchange <- function(){
   d.weight$id <- paste(d.weight$colony, d.weight$sex, d.weight$rep, sep="_")
   
   ggplot(d.weight, aes(x=sex, y=fresh, fill=day, col=day)) +
-    geom_point(position = position_jitterdodge(jitter.width = .05, dodge.width = .8), size=1) +
+    geom_point(position = position_jitterdodge(jitter.width = .05, dodge.width = .8), size=.5) +
     geom_boxplot(outlier.shape=NA, alpha=0.3, width=.8, colour="BLACK")+
-    ylab('Fresh weight (mg)')+xlab('')+
+    ylab('')+xlab('')+
     theme_classic()+
-    scale_fill_viridis(discrete = T, alpha=0.5, direction = -1) +
-    scale_color_viridis(discrete = T, alpha=0.5, direction = -1) +
+    scale_fill_viridis(discrete = T, alpha=0.5, direction = 1) +
+    scale_color_viridis(discrete = T, alpha=0.5, direction = 1) +
     scale_y_continuous(limits=c(0,4)) +
     theme(legend.position = "none")+ 
-    theme(axis.text = element_text(size = 7),
-          axis.title = element_text(size = 9),
-          legend.position = "none")
-  ggsave("output/fresh_weight.pdf", width=3, height=3)
+    theme(axis.text = element_text(size = 8),
+          axis.title = element_text(size = 10),
+          plot.title = element_text(size = 10),
+          legend.position = "none")+
+    ggtitle("Fresh weight (mg)")
+  ggsave("output/fresh_weight.pdf", width=1.6, height=2.6)
   
   r <- lmer(fresh~day*sex+(1|colony/id), data=d.weight)
   Anova(r)

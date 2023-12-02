@@ -19,7 +19,7 @@ Auburn, AL, USA
 University, Kyoto, Japan
 
 \*. Author correspondence:
-[<span class="underline">nobuaki.mzmt@gmail.com</span>](mailto:nobuaki.mzmt@gmail.com)
+[<u>nobuaki.mzmt@gmail.com</u>](mailto:nobuaki.mzmt@gmail.com)
 
 ORCID, N.M.: 0000-0002-6731-8684;
 
@@ -88,11 +88,12 @@ too. All of them can be obtained using servosphere.
 
 In this study
 
-**Results **
+**Results**
 
 **Change of searching activity over time**
 
-**探索時間の経過に伴い、各個体の探索距離は有意に減少した（GLMM, LRT, day: χ2**
+**探索時間の経過に伴い、各個体の探索距離は有意に減少した（GLMM, LRT,
+day: χ2**
 
 **1 = 89.2541, P \< 0.0001, 図
 9-2）。また性間でも探索距離に有意な違いが見られ、メスの方が長い距離歩行した（GLMM,
@@ -100,8 +101,8 @@ LRT, sex: χ21 = 4.5546, P = 0.03283, 図
 9-2B）。一方で、時間に伴う探索距離の変化の傾向は、性間で違いが見られなかった（GLMM,
 LRT, sex:day: χ21 = 0.3393, P = 0.56026, 図 9-2B）。**
 
-![A screenshot of a computer Description automatically
-generated](media/image1.png)
+<img src="media/image1.png" style="width:6.69291in;height:5.88618in"
+alt="A screenshot of a computer Description automatically generated" />
 
 > **Figure 1.** Change of movement patterns according to extended mate
 > search in a termite *Reticulitermes speratus*. (A) Overview of the
@@ -134,31 +135,40 @@ individuals（GLMM, LRT, sex: χ2**
 
 **1 = 4.1447, P = 0.04176, 図 9-3B）.**
 
-![](media/image2.png)
+<img src="media/image2.png" style="width:5.08333in;height:2.64583in" />
 
 > **Figure 2.** Comparison of colony foundation success between alates
 > just after swarming and after 3 days mate search.
 
-**更に、3 日間探索を経験した個体では、タンデム行動にも変化があった。異性ペアのタンデムの観察数は、群飛直後と比べ、3
-日探索後では有意に大きくなった（Wilcoxon Signed rank test, V =
-0, P = 0.03125; 図 9-4B）。また 3 個体以上のタンデムの数もまた有意に大きくなった（Wilcoxon signed
-rank test, V = 0, P = 0.03125; 図 9-4B）。3 個体以上のタンデムはそのほとんどは、メス 1 個体に対しオス
-2 個体が追いかけているものであった**
+**更に、3
+日間探索を経験した個体では、タンデム行動にも変化があった。異性ペアのタンデムの観察数は、群飛直後と比べ、3
+日探索後では有意に大きくなった（Wilcoxon Signed rank test, V = 0, P =
+0.03125; 図 9-4B）。また 3
+個体以上のタンデムの数もまた有意に大きくなった（Wilcoxon signed rank
+test, V = 0, P = 0.03125; 図 9-4B）。3
+個体以上のタンデムはそのほとんどは、メス 1 個体に対しオス 2
+個体が追いかけているものであった**
 
-**（84/95; 88.4%）。一方、オス同士やメス同士の同性タンデムの数は、3 日間の探索の前**
+**（84/95; 88.4%）。一方、オス同士やメス同士の同性タンデムの数は、3
+日間の探索の前**
 
-**後で変化はなかった（Wilcoxon signed rank test, male: V = 14, P = 0.5625; female:
-V = 1.5, P**
+**後で変化はなかった（Wilcoxon signed rank test, male: V = 14, P =
+0.5625; female: V = 1.5, P**
 
-**= 0.375; 図 9-4B）。これらのタンデムペアの組み合わせは、群飛直後、3 日探索後とも**
+**= 0.375; 図 9-4B）。これらのタンデムペアの組み合わせは、群飛直後、3
+日探索後とも**
 
-**にネストメイトか非ネストメイトかは関係がなかった（Wilcoxon signed rank test, 0 day: **
+**にネストメイトか非ネストメイトかは関係がなかった（Wilcoxon signed rank
+test, 0 day:**
 
-**V = 10, P = 1; 3 day: V = 8, P = 0.6875）。また群飛直後の個体では、時間の経過に伴って**
+**V = 10, P = 1; 3 day: V = 8, P =
+0.6875）。また群飛直後の個体では、時間の経過に伴って**
 
-**観測されるタンデムの数が増加したが（Spearman’s rank correlation, S = 3.5474, P = **
+**観測されるタンデムの数が増加したが（Spearman’s rank correlation, S =
+3.5474, P =**
 
-**0.01489; 図 9-4A）、3 日間探索では増加の傾向はなかった（Spearman’s rank correlation, S**
+**0.01489; 図 9-4A）、3 日間探索では増加の傾向はなかった（Spearman’s
+rank correlation, S**
 
 **= 26, P = 0.6583; 図 9-4A）。**
 
@@ -207,9 +217,9 @@ runs in males, which should
 be confirmed in future studies. Finally, female-female tandem is much
 rarer than ma
 
-![](media/image3.png)
+<img src="media/image3.png" style="width:3.57292in;height:5.72917in" />
 
-> **Figure 3. **
+> **Figure 3.**
 
 **Discussion**
 
@@ -217,11 +227,14 @@ rarer than ma
 
 することが明らかとなった。まず探索する時間が長くなれば長くなるほど、歩行する距
 
-離が減少した（図 9-2）。相手がどこにいるか全く分からないランダム探索の状況では
+離が減少した（図
+9-2）。相手がどこにいるか全く分からないランダム探索の状況では
 
-（第 4 章における完全ランダム探索の状況）、可能な限り早く、また直進的に動くこと
+（第 4
+章における完全ランダム探索の状況）、可能な限り早く、また直進的に動くこと
 
-が遭遇効率を上昇させる上で重要な要因となる (James et al. 2008)。そのため、シロアリ
+が遭遇効率を上昇させる上で重要な要因となる (James et al.
+2008)。そのため、シロアリ
 
 が探索する時間が長くなればなるほど、移動能力が下がることは、探索効率の減少につ
 
@@ -229,13 +242,16 @@ rarer than ma
 
 行動を行い、コロニー創設をしワーカーが生じるまでは外からエネルギーを得ることは
 
-ない (Vargo and Husseneder 2009)。そのため、このような移動量の減少は、探索にかか
+ない (Vargo and Husseneder
+2009)。そのため、このような移動量の減少は、探索にかか
 
-るエネルギーのコストによって引き起こされた可能性がある (Wickman and Jansson
+るエネルギーのコストによって引き起こされた可能性がある (Wickman and
+Jansson
 
 1997)。さらにこの探索にかかるエネルギーの消費は、その後のコロニー創設の成功に
 
-も大きな影響を与えることも明らかとなった（図 9-3）。このように、通常は社会性で集
+も大きな影響を与えることも明らかとなった（図
+9-3）。このように、通常は社会性で集
 
 団の中に生きるシロアリにとって、単独で他個体を探索するという行動が長引くことは、
 
@@ -243,17 +259,22 @@ rarer than ma
 
 このような探索にかかる適応度上のコストは、配偶者選択に大きな影響を与えた。
 
-アリーナ内でタンデム行動の観察を行ったところ、群飛直後の個体と比べ、3 日間探索
+アリーナ内でタンデム行動の観察を行ったところ、群飛直後の個体と比べ、3
+日間探索
 
-した個体では、多くのタンデム歩行が見られた（図 9-4）。また 2 個体のオスが 1 個体の
+した個体では、多くのタンデム歩行が見られた（図 9-4）。また 2
+個体のオスが 1 個体の
 
-メスを巡って争う 3 個体以上のタンデムも多く観察できた（図 9-4）。このような配偶者
+メスを巡って争う 3 個体以上のタンデムも多く観察できた（図
+9-4）。このような配偶者
 
 選択の変化は、複数回交尾をよく行う種でもみられ、メスによるオスの配偶者選択が行
 
-われる種において、この時メスの残り寿命が短い (Wilson et al. 2010; Wilgers and Hebets
+われる種において、この時メスの残り寿命が短い (Wilson et al. 2010;
+Wilgers and Hebets
 
-2012)、オスの密度が低い (Alatalo et al. 1988)、繁殖可能な期間が短い (Gotthard et al.
+2012)、オスの密度が低い (Alatalo et al. 1988)、繁殖可能な期間が短い
+(Gotthard et al.
 
 1999)などにより、探索にかかるコストが大きくなる場合には、メスの選り好みが緩和
 
@@ -263,41 +284,52 @@ rarer than ma
 
 者選択においても性選択が重要な役割を果たしていることを示唆する。
 
-タンデム行動の観測数の時間変化においても、群飛直後と 3 日間の探索後で大きな
+タンデム行動の観測数の時間変化においても、群飛直後と 3
+日間の探索後で大きな
 
 違いが見られた。群飛直後の個体では、観察時間の経過に伴って観測されるタンデムの
 
-数が増加した一方、3 日経過ではそのような増加は見られず、最初からタンデムの観測
+数が増加した一方、3
+日経過ではそのような増加は見られず、最初からタンデムの観測
 
-数は多かった（図 9-4）。これは次の様に解釈できる。群飛直後のオスは、まだ自身の探
+数は多かった（図
+9-4）。これは次の様に解釈できる。群飛直後のオスは、まだ自身の探
 
 索行動に余裕があるため、複数のメスを評価してから質の高いメスを選択する。一方で、
 
-3 日間探索したオスは、自身の探索行動に余裕がないため、質にかかわらず出会ったメ
+3
+日間探索したオスは、自身の探索行動に余裕がないため、質にかかわらず出会ったメ
 
-スを選択する。というものである。このような現象は、最適停止問題の 1 つであるおみ
+スを選択する。というものである。このような現象は、最適停止問題の 1
+つであるおみ
 
 あい問題（秘書問題）を適用することで統合的に理解できるだろう。おみあい問題では、
 
-N 人と順番にお見合いするとして、何人目の相手と交際すると最も好みである人と交際
+N
+人と順番にお見合いするとして、何人目の相手と交際すると最も好みである人と交際
 
-できるかを考える問題である (Ferguson 1989)。この解は k = n/e 人目までを無条件で断
+できるかを考える問題である (Ferguson 1989)。この解は k = n/e
+人目までを無条件で断
 
 り、それ以降で一番条件の良いパートナーで選ぶものである。群飛直後は、これからま
 
-だ多くの相手と出会うことがあできると予測されるまで、k が大きな値となり、初期に
+だ多くの相手と出会うことがあできると予測されるまで、k
+が大きな値となり、初期に
 
 はタンデムを行わず相手を評価するだけである。そして、出会った個体の数が増えてく
 
 ると、タンデムを行うことを決め始める個体が出てくるため、時間の経過に応じてタン
 
-デムの数は増加する。一方で、3 日間他個体と出会うことができなかった個体にとって
+デムの数は増加する。一方で、3
+日間他個体と出会うことができなかった個体にとって
 
-は、k はかなり小さい値となる。そのため、無条件で断ることがなくなり、初期段階か
+は、k
+はかなり小さい値となる。そのため、無条件で断ることがなくなり、初期段階か
 
 ら多くのタンデム行動がみられる。このようにシロアリは、配偶者探索における
 
-Sequential choice model の実証に適した材料である (Real 1990; Real 1991)。
+Sequential choice model の実証に適した材料である (Real 1990; Real
+1991)。
 
 探索効率の最適化について、空間的、時間的な最適戦略を探る研究では、本章で検
 
@@ -332,57 +364,92 @@ of this species in Kyoto. To control flight timing, all nesting wood
 pieces were maintained at 20°C until experiments. Before each
 experiment, we transferred nests to a room at 25°C, which promoted
 alates to emerge and fly. Alates were then collected and separated by
-sex. We used individuals that shed their wings by themselves. We stayed
-all experiments within 24 hours after swarming flight.
+sex. We used individuals who shed their wings by themselves. We stayed
+all experiments within 24 hours after the swarming flight.
 
 *Change of searching activity over time*
 
 We investigated how searching activities change according to time after
-swarming flight using there colonies collected in 2016. We investigated
-the searching activity of 9 females and 9 males (3 individuals from 3
-colonies). Each individual was placed on an omni directional servosphere
-and freely walked on a infinite 2 dimensional surface for 30 minutes.
-The observation was performed for 4 times every 24 hours, i.e., just
-after swarming, 1 day, 2 day, and 3 day after the swarming. Termites
-were individually maintained in a Petri fish (90 mm) with a moistened
-piece of filter paper (quarter of 70 mm). The bottom of the dish was
-polished so that termites can walk smoothly in the dish. We maintained
-each termite under the light condition of 16L8D and at 25°C during
-interval of each observation. The observations were performed during the
-time of light condition.
+swarming flight using three colonies collected in 2016. We investigated
+the search activity of nine females and nine males (three from three
+colonies). Each individual was placed on an omnidirectional servosphere
+(Nagaya et al., 2017) and freely walked on an infinite two-dimensional
+surface for 30 minutes. The observation was performed four times every
+24 hours, i.e., just after swarming (= day 0), day 1, day 2, and day 3.
+Termites were individually maintained in a Petri dish (φ = 90 mm) with a
+moistened piece of filter paper (a quarter of 70 mm). The bottom of the
+dish was polished so that termites could walk smoothly on the dish. We
+maintained each termite under the light condition of 16L8D and at 25°C
+during the interval of each observation. The observations were performed
+during the time of light conditions.
 
-Because the sampling rates of data acquisition was not constant in our
-servosphere, we smoothed the coordinates data with median filter (k =5)
-and then estimated the coordinates every 0.2 second (5Hz) by
-interpolating them. We dropped data of first five minutes for further
-analysis. First, from the trajectories obtained from the servosphere, we
-calculated the total distances termites walked during 30 minutes. We
-investigated the effect of time after swarming on walking distracts,
-using a linear mixed model (LLM) that includes time after swarming, sex,
-and their interactions as fixed effect, and original colony as random
-effect (random intercept). The statistical significance of each variable
-was tested using chi-square test (typeII ANOVA).
+Because the sampling rates of data acquisition were not constant in our
+servosphere, we smoothed the coordinates data with a median filter (k
+=5) and interpolated them to obtain the coordinates every 0.2 seconds
+(5Hz). We removed data for the first five minutes and used the rest for
+25 minutes for further analysis.
 
-Second we investigated the time development of pausing patterns. We
-obtained the moved distance every 0.2 second(step length). In
-Reticulitermes speratus, the previous study estimated that the threshold
-for moving and pausing as 0.7mm (Mizumoto and Dobata 2019); termites are
-regarded as moving if they moved more than 0.7mm in 0.2 second, while
-they are pausing if less than 0.7mm. With the sequence of pause and move
-behavior, we obtained the distribution of the duration of pausing. We
-fit truncated Pareto distributions and stretched exponential….
+First, we obtained the moved distance every 0.2 seconds (steplength). By
+summing up these steplengths, we calculated the total distances termites
+walked during 25 minutes. Also, we examinied pausing duration during
+this period. In *Reticulitermes speratus*, the previous study estimated
+that the threshold for moving and pausing was 0.7mm (Mizumoto and
+Dobata, 2019); termites are regarded as moving if they moved more than
+0.7mm in 0.2 seconds, while they are pausing if less than 0.7mm. We
+measured the total pausing duration during 25 minutes observations.
+Then, we investigated the effect of time after swarming on walking
+distracts and pausing durations, using linear mixed models (LLM) that
+includes time after swarming (0, 1, 2, and 3 days after swarming), sex,
+and their interactions as fixed effects, and the original colony as the
+random effect (random intercept). The statistical significance of each
+variable was tested using the chi-square test (type II ANOVA), herein,
+and the following statistical analysis.
 
-Third, we examined how the diffusive of termite movement patterns can
-change according to searching period. We calculated mean squared
-displacements for each of termite movement trajectory. ….
+Second, we evaluated the diffusive properties of individual movements.
+High diffusiveness is critical for the efficiency of random search when
+the targets are randomly distributed and searchers do not have any prior
+information on tagets (James et al., 2008; Mizumoto et al., 2017a),
+which is relevant for termite mate search before encounters (Fig. 1A)
+(Mizumoto and Dobata, 2019). We computed the mean squared displacements
+(MSD) to compare the diffusive properties of individual movements across
+time after swarming. The MSD is defined as the mean of squared distance
+that an organism travels from its starting location to another point
+during a given time, τ. We obtained MSD in the rang of 0.2 \< τ \< 1500,
+using the function *computeMSD*() in the package “flowcatchR”. To
+compare the MSD between time after swarming, we used a LMM, where τ,
+time after swarming, sex, and their interactions were included as fixed
+effects, and individual ids nested within original colonies were
+included as a random effect (random intercept). MSD and τ were log
+transformed before the LMM fitting.
 
-Evaluation of searching efficiency
+*Evaluation of searching efficiency*
 
-Because termites moved less distances and less diffusiveness with a lot
-of pauses, we expected that searching efficiency reduced according to
-extended time of mate search. To quantify the searching efficiency, we
-randomized and paired the trajectories of the observed movements of
-termites in different conditions and
+Because termites moved less distances with less diffusive properties and
+a lot of pauses (Fig. 1B-E), searching efficiency is expected to reduce
+according to extended mate search. To quantify the searching efficiency,
+we used a data-based simulation approach. We projected trajectories of a
+female and a male after randomization and calculated if and when they
+encountered. When mate search of termites extended to multiple days,
+they synchronize their search efforts with the following swarming events
+(Mizumoto et al., 2017b). Given that most termites do not extend mate
+search for multiple days due to pairing or predation (Mizumoto et al.,
+2016), we expect that mating encounters of extended mate searchers are
+usually with new mate searchers (day 0 individuals). Thus, we
+investigated the encounter efficiency in the combinations of 0 day-0
+day, 0 day-1 day, 0 day-2 day, and 0 day-3 day trajectories. We picked
+up one trajectory with 5 FPS of a female and a male and place them at a
+random location in a periodic boundary condition of size = *L* × *L*.
+Each trajectory was horizontally and vertically reversed with the
+probability of 1/2. Following inversion, we rotated the trajectory at
+random degrees from 0 to 360 around the starting point of the
+trajectory. After projecting two trajectories, we estimated if and when
+these two individuals encountered. We regarded they encountered when two
+are within the distance φ at the same time. We performed this process
+100,000 times for eight cominations (0 day-0 day, 0 day-1 day, 0 day-2
+day, and 0 day-3 day, for female-male and male-female). The parameter φ
+value was set as 7 mm, based on the body size of *R. speratus* (Mizumoto
+and Dobata, 2019), and *L* as 223.6, based on the previous studies
+(Kusaka and Matsuura, 2017; Mizumoto and Dobata, 2019).
 
 *Fitness cost of extended mate starch*
 
@@ -456,20 +523,52 @@ This study was supported by Grants-in-Aid for JSPS Research Fellow
 
 **References**
 
-**Supplemental materials **
+James A, Plank MJ, Brown R. 2008. Optimizing the encounter rate in
+biological interactions: Ballistic versus Lévy versus Brownian
+strategies. *Physical Review E* **78**:051128.
+doi:10.1103/PhysRevE.78.051128
+
+Kusaka A, Matsuura K. 2017. Allee effect in termite colony formation:
+influence of alate density and flight timing on pairing success and
+survivorship. *Insectes Sociaux* **65**:17–24.
+doi:10.1007/s00040-017-0580-9
+
+Mizumoto N, Abe MS, Dobata S. 2017a. Optimizing mating encounters by
+sexually dimorphic movements. *Journal of The Royal Society Interface*
+**14**:20170086. doi:10.1098/rsif.2017.0086
+
+Mizumoto N, Dobata S. 2019. Adaptive switch to sexually dimorphic
+movements by partner-seeking termites. *Science Advances*
+**5**:eaau6108. doi:10.1126/sciadv.aau6108
+
+Mizumoto N, Fuchikawa T, Matsuura K. 2017b. Pairing strategy after
+today’s failure: unpaired termites synchronize mate search using photic
+cycles. *Population Ecology* **59**:205–211.
+doi:10.1007/s10144-017-0584-3
+
+Mizumoto N, Yashiro T, Matsuura K. 2016. Male same-sex pairing as an
+adaptive strategy for future reproduction in termites. *Animal
+Behaviour* **119**:179–187. doi:10.1016/j.anbehav.2016.07.007
+
+Nagaya N, Mizumoto N, Abe MS, Dobata S, Sato R, Fujisawa R. 2017.
+Anomalous diffusion on the servosphere : A potential tool for detecting
+inherent organismal movement patterns. *PLoS ONE* **12**:e0177480.
+doi:10.1371/journal.pone.0177480
+
+**Supplemental materials**
 
 **Figure S1**. Trajectories on the servosphere of all observed
 individuals.
 
 **Figure S2.** Observational arena for tandem pairing.
 
-![](media/image4.png)
+<img src="media/image4.png" style="width:7in;height:4.10417in" />
 
 > **Figure S1**. Trajectories on the servosphere of all observed
 > individuals. Each label indicates Species name (Rs = *Reticulitermes
 > speratus*) + Colony name + Sex + Replicates.
 
-![](media/image5.png)
+<img src="media/image5.png" style="width:2.95833in;height:3.08333in" />
 
 > **Figure S2.** Observational arena for tandem pairing. A video camera
 > was located above the observation area on a tripod. Termites were
