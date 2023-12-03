@@ -391,7 +391,9 @@ tandem_plot <- function(){
           axis.title = element_text(size = 9),
           legend.position = "none")
   ggsave("output/tandem_total.pdf", width=3.6, height=3)
-    
+  
+  apply(tapply(dts$obs, dts[,2:3], sum), 1, sum)
+  tapply(dts$obs, dts[,2:3], sum)
   
   wilcox.exact(dts[dts$type=="heterotandem"&dts$day==0,]$obs, 
                dts[dts$type=="heterotandem"&dts$day==3,]$obs, paired=T)
