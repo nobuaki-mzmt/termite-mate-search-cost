@@ -177,7 +177,35 @@ plot_summary <- function(){
     scale_fill_brewer(palette = "Dark2")+
     scale_y_continuous(limits = c(0, 3.5))
   
-  r = lmer(mean_moving_speed ~ day + sex + (1|colony/id), data=df_sum)
+  df_sum$mean_moving_speed <- df_sum$mean_moving_speed  * 5
+  sumrepdat <- summarySE(df_sum, measurevar = "mean_moving_speed", 
+                         groupvars=c("day", "sex"),na.rm = T)
+  dodge_w = .3
+  ggplot(df_sum, aes(x=day, y=mean_moving_speed, col=sex))+
+    geom_point(aes(x = (day), y = mean_moving_speed, colour = sex),
+               position = position_jitterdodge(jitter.width = .05, dodge.width = dodge_w),
+               size = .9, shape = 20, alpha=.25)+
+    geom_line(data = sumrepdat, position = position_dodge(width = dodge_w),
+              aes(x = (day), y = mean_moving_speed, group = sex, colour = sex),
+              linetype = 3)+
+    geom_point(data = sumrepdat, position = position_dodge(width = dodge_w),
+               aes(x = (day), y = mean_moving_speed, group = sex, colour = sex),
+               shape = 1) +
+    geom_errorbar(data = sumrepdat, position = position_dodge(width = dodge_w),
+                  aes(x = (day), y = mean_moving_speed, 
+                      group = sex, colour = sex, 
+                      ymin = mean_moving_speed-se, ymax = mean_moving_speed+se), width = .05)+
+    scale_y_continuous(limits = c(0, 20))+
+    scale_colour_viridis(discrete = T, end=.5)+
+    scale_fill_viridis(discrete = T)+
+    theme_classic()+
+    xlab("Day") + ylab("Movement speed (mm / sec)") +
+    theme(axis.text = element_text(size = 7),
+          axis.title = element_text(size = 9),
+          legend.position = "none")
+  ggsave("output/mean_movement_speed.pdf", width = 2.5, height=2.5)
+  
+  r = lmer(mean_moving_speed ~ day * sex + (1|colony/id), data=df_sum)
   Anova(r)
   
   # turning patterns
