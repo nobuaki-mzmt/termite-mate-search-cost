@@ -1,5 +1,5 @@
-**Wasted efforts impair random search efficiency and reduce the level of
-choosiness in mate-pairing termites.**
+**Wasted efforts impair random search efficiency and reduce choosiness
+in mate-pairing termites.**
 
 **Nobuaki Mizumoto<sup>1,2,3,4\*</sup>, Naohisa Nagaya**<sup>5</sup>**,
 Ryusuke Fujisawa**<sup>6</sup>
@@ -26,7 +26,7 @@ Kyoto-City, Japan
 Institute of Technology, Fukuoka, Japan
 
 \*. Author correspondence:
-[<u>nobuaki.mzmt@gmail.com</u>](mailto:nobuaki.mzmt@gmail.com)
+[<span class="underline">nobuaki.mzmt@gmail.com</span>](mailto:nobuaki.mzmt@gmail.com)
 
 ORCID, N.M.: 0000-0002-6731-8684;
 
@@ -36,23 +36,23 @@ Random search theories predict that animals employ movement patterns
 that optimize encounter rates with target resources. However, animals
 are not always able to achieve the optimal random search. Energy
 depletion, for example, limits searchers’ movement activities, forcing
-them to adjust their behaviors before and after the encounters. Here we
+them to adjust their behaviors before and after encounters. Here, we
 quantified the cost of mate search in a termite, *Reticulitermes
 speratus*, and revealed that the cost reduces the selectivity of mating
-partners. After a dispersal flight, termites keep searching for a mating
-partner; otherwise, they die. We found that their movement activity and
+partners. After a dispersal flight, termites search for a mating partner
+until they find one or die. We found that their movement activity and
 diffusiveness progressively declined over observational days. Our
-data-based simulations qualitatively confirmed that this reduced
-movement diffusiveness decreased the searching efficiency. Also,
-termites with prolonged search periods had lower colony foundation
-success and fewer offspring. Thus, mate search imposes doubled costs on
-termites. Finally, we found that termites with an extended mate search
-reduced the selectivity of mating partners, where males immediately
-paired with any encountering females and even frequently exhibited
-same-sex pairing. Thus, termites dramatically changed their mate search
-behavior depending on their physiological conditions. It is essential to
-account for the searchers’ internal states to fill the gap between
-random search theories and empirical behavioral observations.
+data-based simulations qualitatively confirmed that the reduced movement
+diffusiveness decreased the searching efficiency. Also, termites with
+prolonged search periods had lower colony foundation success and fewer
+offspring. Thus, mate search imposes doubled costs on termites. Finally,
+we found that termites with an extended mate search reduced the
+selectivity of mating partners, where males immediately paired with any
+encountering females. Thus, termites dramatically changed their mate
+search behavior depending on their physiological conditions. Our finding
+highlights that accounting for the searchers’ internal states is
+essential to fill the gap between random search theories and empirical
+behavioral observations.
 
 **Keywords:** Random walk; Tandem runs; Sexual selection; Social
 insects; Movement ecology
@@ -60,73 +60,75 @@ insects; Movement ecology
 **Introduction**
 
 When searching for targets whose location is unknown, animals benefit by
-adopting movement patterns that promote random encounters. Random search
-theories have predicted the best movement patterns that maximize
-encounter rates with target objects, across a variety of environmental
-conditions, including distribution and movement patterns of target
-objects, time limitation, and ecological situations. Also, empirical
-studies have shown that animals engage in optimal random search
-strategies, especially focusing on the behavioral changes of the
-searchers across differential searching environments. In random search
-theories, however, although exogenous factors have been considered in
-both theoretical modeling and empirical observations, studies have
-rarely taken into account the indigenous conditions of searching agents.
-Real animals dramatically change their physiological conditions,
-including sexes, ages, and nutritional conditions. This limits the
-connectivity between theories of random search and empirical
-observations of animal searching behaviors.
+adopting movement patterns that promote random encounters (Bartumeus and
+Catalan, 2009; Viswanathan et al., 2011). Random search theories have
+predicted the best movement patterns that maximize encounter rates with
+target objects across various environmental conditions, including
+distribution and movement patterns of target objects (Bartumeus et al.,
+2005; Cain, 1985; Palyulin et al., 2014; Viswanathan et al., 1999), time
+limitation (Mizumoto et al., 2017a), and ecological situations (Abe and
+Shimada, 2015). Also, empirical studies have shown that animals use
+optimal random search strategies by focusing on how searchers change
+their movement patterns across differential searching environments
+(Bartumeus et al., 2003; Humphries et al., 2010; Mizumoto and Dobata,
+2019; Weimerskirch et al., 2007). However, although these studies
+emphasized the importance of external environments to determine the
+optimal ransom search strategies, the internal conditions of searchers
+have rarely been considered. Real animals have different entities, such
+as sexes and ages, among individuals, and their physiological conditions
+dramatically change according to time due to e.g., changes of
+nutritional conditions. Such biological contexts are essential to
+connect theories of random search and empirical observations of animal
+searching behaviors (refs).
 
-Mating is one of the main motivations for search, and both females and
-males evolved optimal sex-specific movement patterns to maximize mating
-encounters. During mate searches, an encounter is one of the goals but
-not everything. Once they encounter the potential mating partners, then
-they need to make a decision to mate with the encountered individuals.
-Thus, enhancing mating encounters is critical before the encounter,
-while evaluation of the mating partner will be involved after
-encounters. In random search theories, because movement patterns
-influence the frequency of mating encounters netween partners, it also
-has a strong influence on the subsequent decision. However, the
-relationships between moving patterns and mate choice remain totally
-unknown. To achieve optimal mating encounters, animals should
-plastically adjust movement patterns. However, if they could not achieve
-the optimal movements before encounters, due to physiological
-conditions, mate searchers could plastically adjust their subsequent
-mate choice after encounters.
+Mate search is essential for sexual reproduction, and random search
+theories predict that both females and males evolved sex-specific
+movement patterns to optimize mating encounters (Mizumoto et al., 2017a;
+Mizumoto and Dobata, 2018; Reynolds, 2006). However, behavior after
+encounter is also critical to obtaining a partner in animal mating. In
+species with a high cost of mating, mates decide whether to select the
+encountered individual as a partner (refs). The decision criteria are
+based on a variety of factors, such as the frequency of mating
+encounters (refs). Thus, one can expect that changes in their random
+search can subsequently affect the decision-making process for mate
+choice. For example, if mate searchers could not achieve the optimal
+movements due to physiological conditions, mate searchers would
+plastically adjust their subsequent mate choice after encounters.
 
-To fill this gap and study the plastic changes of random search,
-*Reticulitermes* termites provide an ideal system. During a certain
-season of the year, alates (winged reproductives) fly to disperse for
-mating. After dispersal, termites shed their wings, walk to search for
-mating partners, and, upon successful encounters, perform tandem runs to
-stay together while looking for a potential nest site (Fig. 1A)
-(Nutting, 1969). In this process, both females and males of termites
-flexibly change their random search strategies to enhance mating
-encounters. Before encounters, both females and males actively explore
-the environments to cover the wide regions (Mizumoto and Dobata, 2019),
-while leaders pause and followers move to enhance reunion once they are
-accidentally separated during tandem pairing (Mizumoto et al., 2022;
-Mizumoto and Dobata, 2019). Pairs excavate wood or soil to establish a
-nest as soon as they start tandem runs. Mate search is the only behavior
-of these dealates, and mate search will last until they find a partner,
-otherwise, they die (Mizumoto et al., 2016). If they could not find a
-partner, the mate search could last multiple days (Kusaka and Matsuura,
-2017; Mizumoto et al., 2017b), with photoperiodic circadian rhythms
-(Mizumoto et al., 2017b). The mate search could be highly costly, given
-that termites do not feed and obtain energy until they start a new
-colony (refs), and social isolation is exceptional in their life history
-(Koto et al., 2015). Thus, the costs associated with mate search must
-have a strong impact on their searching and mating strategies.
+To study the plastic changes of random search, *Reticulitermes* termites
+provide an ideal system. During a particular season, alates (winged
+reproductives) fly to disperse for mating. After dispersal, termites
+shed their wings, walk to search for mating partners, and, upon
+successful encounters, perform tandem runs to stay together while
+looking for a potential nest site (Fig. 1A) (Nutting, 1969). In this
+process, both females and males of termites flexibly change their random
+search strategies to enhance mating encounters. Before encounters, both
+females and males actively explore the environments to cover a wide
+region (Mizumoto and Dobata, 2019), while leaders pause and followers
+move to enhance reunion once they are accidentally separated during
+tandem pairing (Mizumoto et al., 2022; Mizumoto and Dobata, 2019). Pairs
+excavate wood or soil to establish a nest as soon as they start tandem
+runs. Mate search is the only behavior of these dealates, and mate
+search will last until they find a partner; otherwise, they die
+(Mizumoto et al., 2016). If they could not find a partner, the mate
+search could last multiple days (Kusaka and Matsuura, 2017; Mizumoto et
+al., 2017b), with photoperiodic circadian rhythms (Mizumoto et al.,
+2017b). The mate search could be highly costly, given that termites do
+not feed and obtain energy until they start a new colony (refs), and
+social isolation is exceptional in their life history (Koto et al.,
+2015). Thus, the costs associated with mate search must strongly impact
+their searching and mating strategies.
 
 In this study, we quantify the cost of mate search and investigate its
-influence on the mate searching behavior in a termite, *Reticulitermes
+influence on the mate-searching behavior in a termite, *Reticulitermes
 speratus* (Kolbe 1985). We force dealates to search for mating partners
-without encountering for 72 hours and examine how this alter their
+without encountering them for 72 hours and examine how this alters their
 movement patterns, colony foundation success, and mate choice.
 
 Movement patterns. Diffusiveness is important parameters. Pausing is
 too. All of them can be obtained using servosphere.
 
-**Results**
+**Results **
 
 **Change of searching activity over time**
 
@@ -139,12 +141,12 @@ LRT, day: χ<sup>2</sup><sub>3</sub> = 98.9, *P* \< 0.001, Fig. 1C), with
 females moving more distances than males (χ<sup>2</sup><sub>1</sub> =
 4.5, *P* = 0.033). Similarly, both females and males paused for a longer
 duration according to observational day **(**LMM, LRT, day:
-χ<sup>2</sup><sub>3</sub> = 71.7, *P* \< 0.001, Fig. 1D), with no sexual
-differences **(**χ<sup>2</sup><sub>1</sub> = 1.84, *P* = 0.17, Fig. 1D).
-This difference of movement activities turned out the different
-diffusive properties of termites. Termites just after swarming had the
-largest MSD, and the value of MSD decreased according to days after
-swarming (LMM, LRT, day: χ<sup>2</sup><sub>3</sub> = 398.9, *P* \<
+χ<sup>2</sup><sub>3</sub> = 71.7, *P* \< 0.001, Fig. 1D), with no
+sexual differences **(**χ<sup>2</sup><sub>1</sub> = 1.84, *P* = 0.17,
+Fig. 1D). This difference of movement activities turned out the
+different diffusive properties of termites. Termites just after swarming
+had the largest MSD, and the value of MSD decreased according to days
+after swarming (LMM, LRT, day: χ<sup>2</sup><sub>3</sub> = 398.9, *P* \<
 0.001, Fig. 1E). Note that the slopes did not change according to
 observation days in termites (LMM, LRT, interactions between day and τ:
 χ<sup>2</sup><sub>3</sub> = 5.89, *P* = 0.11), indicating that the
@@ -152,83 +154,91 @@ decrease of MSD was caused by changes of movement activities, such as
 movement speed and pausing duration, rather than the type of random
 walks, e.g., changes of turning patterns or Lévy walk properties.
 Therefore, the observed behavioral changes did not reflect the changes
-of random search strategies but inactivity of termites, perhaps caused
-by energy depletion.
+in random search strategies but the inactivity of termites, perhaps
+caused by energy depletion.
 
-When termites search for a mating partner, whose location is unknown to
-searchers, high diffusiveness is critical for the encounter efficiency
+When termites search for a mating partner whose location is unknown to
+searchers, high diffusiveness is critical for encounter efficiency
 (Mizumoto and Dobata, 2019), as shown in theoretical studies on random
-search when the targets are randomly distributed and searchers do not
-have any prior information on targets (James et al., 2008; Mizumoto et
-al., 2017a). Because termites moved less distances with less diffusive
+search when searchers do not have any prior information on the location
+of randomly distributed targets (James et al., 2008; Mizumoto et al.,
+2017a). Because termites moved fewer distances with less diffusive
 properties with longer pauses (Fig. 1B-E), searching efficiency is
-expected to reduce according to extended mate search. Accordngly, our
+expected to reduce according to extended mate search. Accordingly, our
 data-based simulations demonstrated that searching efficiency of
 termites was progressively reduced according to observation days (Fig.
 1F). In both females and males, searching efficiency was highest in
 termites just after the swarming, which showed the highest diffusive
-properties (Fig. 1EF), and lowest in termites after 3 days that had the
-lowest diffusive properties (Fig. 1EF).
+properties (Fig. 1EF), and lowest in termites after three days that had
+the lowest diffusive properties (Fig. 1EF).
 
-<img src="media/image1.png" style="width:6.69291in;height:5.88618in"
-alt="A screenshot of a computer Description automatically generated" />
+![A screenshot of a computer Description automatically
+generated](media/image1.png)
 
-> **Figure 1.** Change of movement patterns according to extended mate
+> **Figure 1.** Change in movement patterns according to extended mate
 > search in a termite *Reticulitermes speratus*. (A) Overview of the
 > mating biology and experimental setup. After swarming flights,
-> termites shed their wings and walk to search for a partner. After
-> successful encounter, they form a tandem running pair and found a
-> colony. Mate search usually ends in a day, otherwise it can last until
-> they find a partner. We observed their movement patterns every 24
-> hours for 30 minutes over 4 days (day 0-3). (B) Representative
+> termites shed their wings and walk to search for a partner. After a
+> successful encounter, they formed a tandem running pair and found a
+> colony. Mate search usually ends in a day; otherwise, it can last
+> until they find a partner. We observed their movement patterns every
+> 24 hours for 30 minutes over four days (day 0-3). (B) Representative
 > trajectories of a termite. Each trajectory corresponds to 25 minutes,
 > where a termite moved less and less distances across days. (C-D)
 > Comparison of traveled distances (C) and pausing duration (D) of
 > termites across days after swarming. Bars indicate mean ± s.e. (E)
 > Mean squared displacements (MSD) of the trajectories on the
-> servosphere across days after swarming. Thick lines indicate mean for
-> each day’s observations, where data of females and males were pooled.
-> (F) Simulation results for comparing searching efficiencies of
+> servosphere across days after swarming. Thick lines indicate the mean
+> for each day’s observations, where data of females and males were
+> pooled. (F) Simulation results for comparing searching efficiencies of
 > movement patterns observed in termites across days after swarming (*L*
-> = 223.6, φ = 7). The results were obtained from means of 100,000
-> simulations.
+> = 223.6, φ = 7). The results were obtained from the means of 100,000
+> simulations for each combination.
 
 *Fitness cost of extended mate starch*
 
-We found that extended mating search incurs the cost on colony
-foundation success. The colony foundation success was significantly
-reduced in termite pairs that experienced 3 days extended search,
-compared with those found a colony just after swarming (GLMM, LRT, sex:
-χ<sup>2</sup><sub>1</sub> = 4.02, *P* = 0.04; Fig. 2B). Also, even after
-the successful colony foundations, pairs with extended mate search had
-the significantly smaller number of offspring (GLMM, LRT, sex:
-χ<sup>2</sup><sub>1</sub> = 4.14, *P* = 0.04, Fig. 2C).
+If the inactivity of termites with extended mate search comes from
+energy depletion, extended search causes long-term fitness costs, as
+well as a reduction of searching efficiency. We found that extended
+mating search incurs the cost of colony foundation success. The colony
+foundation success was significantly reduced in termite pairs that
+experienced three days extended search, compared with those found a
+colony just after swarming (GLMM, LRT, sex: χ<sup>2</sup><sub>1</sub> =
+4.02, *P* = 0.04; Fig. 2B). Also, even after the successful colony
+foundations, pairs with extended mate search had the significantly
+smaller number of offspring (GLMM, LRT, sex: χ<sup>2</sup><sub>1</sub> =
+4.14, *P* = 0.04, Fig. 2C). Thus, the termites with extended mate search
+are less attractive options for other termites to make a pair.
 
-<img src="media/image2.png" style="width:5.08333in;height:2.64583in" />
+Although termites with extended mate search do not perform well after
+colony foundations, they performed as well as the termites just after
+swarming as a tandem pairing partner candidate during mate choice.
+
+![](media/image2.png)
 
 > **Figure 2.** Comparison of colony foundation success between alates
-> just after swarming and after 3 days mate search.
+> just after swarming and after three days of mate search.
 
 *Changes in tandem pairing after extended mate search*
 
 Extended mate search in isolation dramatically increased the motivation
 of tandem running behavior in termites. In total, we observed 219 tandem
-runs for termites just after swarming (166 heterosexual, 36
-male-male,one female-female tandem run, and 16 tandems with \>2
-individuals), while 679 for termites that experienced 72 hours mate
-search (564 heterosexual, 30 male-male, six female-female, and 79
-tandems with \>2 individuals), during 30 minutes observations. Termites
-with extended mate search showed significantly larger number of
-heterotrophic tandem runs (Wilcoxon Signed rank test, *V* = 0, *P* =
-0.03; Fig. 3B) and tandem runs with more than two individuals (Wilcoxon
-signed rank test, *V* = 0, *P* = 0.03; Fig. 3B), but not male-male
-(Wilcoxon signed rank test, *V* = 14, *P* = 0.56; Fig. 3B) and
-female-female tandem runs (Wilcoxon signed rank test, *V* = 1.5, *P* =
-0.375; Fig. 3B). Most tandem runs with more than two individuals were
-that two males following one female (84/95; 88.4%). There was no
-significant difference in the number of tandems between nest-mate or
-non-nest mate pairing in all these pairing combinations (Wilcoxon signed
-rank test, 0 day: *V* = 10, *P* = 1; 3 day: *V* = *8*, P = 0.6875).
+runs for termites just after swarming (166 heterosexual, 36 male-male,
+one female-female tandem run, and 16 tandems with \>2 individuals),
+while 679 for termites that experienced 72 hours of mate search (564
+heterosexual, 30 male-male, six female-female, and 79 tandems with \>2
+individuals), during 30 minutes observations. Termites with extended
+mate search showed significantly larger number of heterotrophic tandem
+runs (Wilcoxon Signed rank test, *V* = 0, *P* = 0.03; Fig. 3B) and
+tandem runs with more than two individuals (Wilcoxon signed rank test,
+*V* = 0, *P* = 0.03; Fig. 3B), but not male-male (Wilcoxon signed rank
+test, *V* = 14, *P* = 0.56; Fig. 3B) and female-female tandem runs
+(Wilcoxon signed rank test, *V* = 1.5, *P* = 0.375; Fig. 3B). Most
+tandem runs with more than two individuals were that two males following
+one female (84/95; 88.4%). There was no significant difference in the
+number of tandems between nest-mate or non-nest mate pairing in all
+these pairing combinations (Wilcoxon signed rank test, 0 day: *V* = 10,
+*P* = 1; 3 day: *V* = *8*, P = 0.6875).
 
 Furthermore, between termites with and without extended mate search, we
 found distinct patterns of time development of tandem pairing. In
@@ -243,7 +253,7 @@ correlation, *S* = 26, *P* = 0.66; Fig. 3A). Thus, the motivation of
 tandem runs was highest in termites with experiencing extended searches,
 while it increased according to time in termites just after swarming.
 
-<img src="media/image3.png" style="width:3in;height:4.8105in" />
+![](media/image3.png)
 
 > **Figure 3.** Comparison of observed tandem runs between termites just
 > after swarming (0 day) and termites that experienced isolated mate
@@ -357,63 +367,62 @@ surface for 30 minutes. The observation was performed four times every
 24 hours, i.e., just after swarming (= day 0), day 1, day 2, and day 3.
 Termites were individually maintained in a Petri dish (φ = 90 mm) with a
 moistened piece of filter paper (a quarter of 70 mm). The bottom of the
-dish was polished so that termites could walk smoothly on the dish. We
+dish was polished so that termites could walk smoothly on it. We
 maintained each termite under the light condition of 16L8D and at 25°C
-during the interval of each observation. The observations were performed
-during the time of light conditions.
+during each observation interval. The observations were performed during
+the time of light conditions. Because data acquisition was not in a
+constant sampling rate in our servosphere, we interpolated the
+coordinates data to obtain the coordinates every 0.2 seconds (5Hz) after
+smoothing them with a median filter (k =5). Then. We removed data for
+the first five minutes and used the rest for 25 minutes for further
+analysis.
 
-Because the sampling rates of data acquisition were not constant in our
-servosphere, we smoothed the coordinates data with a median filter (k
-=5) and interpolated them to obtain the coordinates every 0.2 seconds
-(5Hz). We removed data for the first five minutes and used the rest for
-25 minutes for further analysis.
-
-First, we obtained the moved distance every 0.2 seconds (steplength). By
-summing up these steplengths, we calculated the total distances termites
-walked during 25 minutes. Also, we examinied pausing duration during
+First, we obtained the moved distance every 0.2 seconds (steplength). We
+calculated the total distances termites walked during 25 minutes by
+summing up these steplengths. Also, we examined pausing duration during
 this period. In *Reticulitermes speratus*, the previous study estimated
 that the threshold for moving and pausing was 0.7mm (Mizumoto and
-Dobata, 2019); termites are regarded as moving if they moved more than
+Dobata, 2019); we regarded termites are moving if they moved more than
 0.7mm in 0.2 seconds, while they are pausing if less than 0.7mm. We
-measured the total pausing duration during 25 minutes observations.
-Then, we investigated the effect of time after swarming on walking
-distracts and pausing durations, using linear mixed models (LLM) that
-includes time after swarming (0, 1, 2, and 3 days after swarming), sex,
-and their interactions as fixed effects, and the original colony as the
-random effect (random intercept). The statistical significance of each
-variable was tested using the chi-square test (type II ANOVA), herein,
-and the following statistical analysis.
+measured the total pausing duration during 25-minute observations. Then,
+we investigated the effect of time after swarming on walking distracts
+and pausing durations, using linear mixed models (LLM) that include time
+after swarming (0, 1, 2, and 3 days after swarming), sex, and their
+interactions as fixed effects, and the original colony as the random
+effect (random intercept). The statistical significance of each variable
+was tested using the chi-square test (type II ANOVA) herein and the
+following statistical analysis.
 
 Second, we evaluated the diffusive properties of individual movements.
-High diffusiveness is critical for the efficiency of random search when
-the targets are randomly distributed and searchers do not have any prior
-information on tagets (James et al., 2008; Mizumoto et al., 2017a),
-which is relevant for termite mate search before encounters (Fig. 1A)
-(Mizumoto and Dobata, 2019). We computed the mean squared displacements
-(MSD) to compare the diffusive properties of individual movements across
-time after swarming. The MSD is defined as the mean of squared distance
-that an organism travels from its starting location to another point
-during a given time, τ. We obtained MSD in the range of 0.2 \< τ \<
-1500, using the function *computeMSD*() in the package “flowcatchR”. To
-compare the MSD between time after swarming, we used a LMM, where τ,
-time after swarming, sex, and their interactions were included as fixed
-effects, and individual ids nested within original colonies were
-included as a random effect (random intercept). MSD and τ were log
-transformed before the LMM fitting.
+High diffusiveness is critical for the efficiency of the random search
+when searchers do not have any prior information on the location of
+targets that are randomly distributed (James et al., 2008; Mizumoto et
+al., 2017a), which is relevant for termite mate search before encounters
+(Fig. 1A) (Mizumoto and Dobata, 2019). We computed the mean squared
+displacements (MSD) to compare the diffusive properties of individual
+movements across time after swarming. The MSD is defined as the mean of
+squared distance that an organism travels from its starting location to
+another point during a given time, τ. We obtained MSD in the range of
+0.2 \< τ \< 1500, using the function *computeMSD*() in the package
+“flowcatchR”. To compare the MSD between time after swarming, we used
+an LMM, where τ, time after swarming, sex, and their interactions were
+included as fixed effects, and individual ids nested within original
+colonies were included as a random effect (random intercept). MSD and τ
+were log transformed before the LMM fitting.
 
 *Evaluation of searching efficiency*
 
-Because termites moved less distances with less diffusive properties and
-a lot of pauses (Fig. 1B-E), searching efficiency is expected to reduce
-according to extended mate search. To quantify the searching efficiency,
-we used a data-based simulation approach. We projected trajectories of a
-female and a male after randomization and calculated if and when they
+Because termites moved fewer distances with less diffusive properties
+and many pauses (Fig. 1B-E), searching efficiency is expected to reduce
+according to extended mate search. To quantify the search efficiency, we
+used a data-based simulation approach. After randomization, we projected
+the trajectories of a female and a male and calculated if and when they
 encountered. When mate search of termites extended to multiple days,
-they synchronize their search efforts with the following swarming events
-(Mizumoto et al., 2017b). Given that most termites do not extend mate
-search for multiple days due to pairing or predation (Mizumoto et al.,
-2016), we expect that mating encounters of extended mate searchers are
-usually with new mate searchers (day 0 individuals). Thus, we
+they synchronized their search efforts with the following swarming
+events (Mizumoto et al., 2017b). Given that most termites do not extend
+mate search for multiple days due to pairing or predation (Mizumoto et
+al., 2016), we expect that mating encounters of extended mate searchers
+are usually with new mate searchers (day 0 individuals). Thus, we
 investigated the encounter efficiency in the combinations of 0 day-0
 day, 0 day-1 day, 0 day-2 day, and 0 day-3 day trajectories. We picked
 up one trajectory with 5 FPS of a female and a male and place them at a
@@ -482,48 +491,48 @@ colonies.
 
 *The effect of extended searching on tandem pairing occurrence*
 
-We investigated how extended mate search affect the pairing dynamics,
+We investigated how extended mate search affects the pairing dynamics,
 using colonies collected in 2016. After swarming, ten females and ten
 males of dealate were selected from two different colonies. These 40
-individuals were paint marked with one colored on the abdomen for sex
-and colony identification (PX-20; Mitsubishi). All 40 individuals were
-maintained for 30 min (just after swarming) or 72 hours (extended mate
-search) separately in a 24 well plate before the observation. Note that
-the results of 30 minutes treatment were already reported in (see Text
-S1 of (Mizumoto et al., 2022)).We introduced 40 individuals to the
-experimental arena (ø = 600 mm). The experimental arena consisted of a
-Styrofoam board (600 x 600 mm) and a circular plastic tube (ø = 600 mm,
-height = 100 mm). After being introduced in the arena, we observed
-termite movements for 30 minutes within a part of the experimental arena
-(200 x 100 mm) located at the edge of the circular arena (Fig. S2). We
-did so because most individuals walked along the edge of the arena,
-repeatedly passing across the observational arena (Video S1 and S2). We
-counted the number of individuals passing across the observational area
-with their status (single individuals, heterosexual tandems, same-sex
-tandems, tandems with \>3 individuals). We performed the experiments six
-times with different colony combinations for each treatment. The
-experimental arena was cleaned with 70% ethanol and distilled water
-before each experiment.
+individuals were painted and marked with one color on the abdomen for
+sex and colony identification (PX-20; Mitsubishi). All 40 individuals
+were maintained for 30 min (just after swarming) or 72 hours (extended
+mate search) separately in a 24-well plate before the observation. Note
+that the results of the 30-minute treatment were reported in a previous
+study (see Text S1 of (Mizumoto et al., 2022)). We introduced 40
+individuals to the experimental arena (ø = 600 mm). The experimental
+arena consisted of a Styrofoam board (600 x 600 mm) and a circular
+plastic tube (ø = 600 mm, height = 100 mm). After being introduced in
+the arena, we observed termite movements for 30 minutes within a part of
+the experimental arena (200 x 100 mm) located at the edge of the
+circular arena (Fig. S2). We did so because most individuals walked
+along the arena's edge, repeatedly passing across the observational
+arena (Video S1 and S2). We counted the number of individuals passing
+across the observational area with their status (single individuals,
+heterosexual tandems, same-sex tandems, tandems with \>3 individuals).
+We performed the experiments six times with different colony
+combinations for each treatment. The experimental arena was cleaned with
+70% ethanol and distilled water before each experiment.
 
-We compared the total number of observation of pairing units between
-termites just after swarming and after extended mate search, using
-Wilcoxon signed rank test. We also investigated the time development of
-observed tandem running pairs. We binned our 30 minutes observation into
-0-5 minutes, 5-10 minutes, …, 25-30 minutes and counted the number of
-observed tandem pairs during each time-windows. We used spearman’s rank
+Using the Wilcoxon signed rank test, we compared the number of
+observations of pairing units between termites just after swarming and
+after extended mate search. We also investigated the time development of
+observed tandem running pairs. We binned our 30-minute observation into
+0-5 minutes, 5-10 minutes, …, 25-30 minutes, and counted the number of
+observed tandem pairs during each time-windows. We used Spearman’s rank
 relation test to test if the number of observed tandem running pairs
-increase according to time developments.
+increased according to time developments.
 
-All analysis were performed by R v4.3.1 (R Core Team, 2023) with
-libraries of “lme4”, “car”, and “exactRankTests” for statistical tests,
+All analyses were performed by R v4.3.1 (R Core Team, 2023) with
+libraries of “lme4,” “car,” and “exactRankTests” for statistical tests
 and “Rcpp” for data-based simulations. All data with R and Cpp scripts
 are available at GitHub
 (github.com/nobuaki-mzmt/termite-mate-search-cost). The accepted version
-will be uploaded to Zenode to obtain DOI for the version of record.
+will be uploaded to Zenode to obtain DOI for the version of the record.
 
 **Acknowledgments**
 
-We thank Shigeto Dobata, Kenji Matsuura, and Tomonari Nozaki, for
+We thank Shigeto Dobata, Kenji Matsuura, and Tomonari Nozaki for
 valuable intellectual inputs for the experiments, and XXX for help with
 termite collections. This study was supported by Grants-in-Aid for JSPS
 Research Fellow 15J02767 (NM) and an IPSF fellowship from OIST.
@@ -533,8 +542,8 @@ Research Fellow 15J02767 (NM) and an IPSF fellowship from OIST.
 N.M.: conceptualization, data curation, formal analysis, funding
 acquisition, investigation, methodology, project administration,
 resources, supervision, validation, visualization, writing-original
-draft, writing-review and editing. N.N.: resources, softwares,
-writing-review and editing. R.F.: resources, softwares, writing-review
+draft, writing-review and editing. N.N.: resources, software,
+writing-review and editing. R.F.: resources, software, writing-review
 and editing.
 
 **Competing Interest Statement**
@@ -544,81 +553,101 @@ contents of this manuscript.
 
 **References**
 
-James A, Plank MJ, Brown R. 2008. Optimizing the encounter rate in
-biological interactions: Ballistic versus Lévy versus Brownian
-strategies. *Physical Review E* **78**:051128.
-doi:10.1103/PhysRevE.78.051128
-
-Koto A, Mersch D, Hollis B, Keller L. 2015. Social isolation causes
-mortality by disrupting energy homeostasis in ants. *Behavioral Ecology
-and Sociobiology* **69**:583–591. doi:10.1007/s00265-014-1869-6
-
-Kusaka A, Matsuura K. 2017. Allee effect in termite colony formation:
-influence of alate density and flight timing on pairing success and
-survivorship. *Insectes Sociaux* **65**:17–24.
-doi:10.1007/s00040-017-0580-9
-
-Mitaka Y, Akino T, Matsuura K. 2023. Development of a standard medium
-for culturing the termite Reticulitermes speratus. *Insect Soc*
-**70**:265–274. doi:10.1007/s00040-023-00907-6
-
-Mizumoto N, Abe MS, Dobata S. 2017a. Optimizing mating encounters by
-sexually dimorphic movements. *Journal of The Royal Society Interface*
-**14**:20170086. doi:10.1098/rsif.2017.0086
-
-Mizumoto N, Bourguignon T, Bailey NW. 2022. Ancestral sex-role
-plasticity facilitates the evolution of same-sex sexual behavior.
-*Proceedings of the National Academy of Sciences of the United States of
-America* **119**:e2212401119. doi:10.1073/pnas.2212401119
-
-Mizumoto N, Dobata S. 2019. Adaptive switch to sexually dimorphic
-movements by partner-seeking termites. *Science Advances*
-**5**:eaau6108. doi:10.1126/sciadv.aau6108
-
-Mizumoto N, Fuchikawa T, Matsuura K. 2017b. Pairing strategy after
-today’s failure: unpaired termites synchronize mate search using photic
-cycles. *Population Ecology* **59**:205–211.
-doi:10.1007/s10144-017-0584-3
-
-Mizumoto N, Lee SB, Valentini G, Chouvenc T, Pratt SC. 2021.
-Coordination of movement via complementary interactions of leaders and
-followers in termite mating pairs. *Proceedings of the Royal Society B:
-Biological Sciences* **288**:20210998. doi:10.1098/rspb.2021.0998
-
-Mizumoto N, Yashiro T, Matsuura K. 2016. Male same-sex pairing as an
-adaptive strategy for future reproduction in termites. *Animal
-Behaviour* **119**:179–187. doi:10.1016/j.anbehav.2016.07.007
-
-Nagaya N, Mizumoto N, Abe MS, Dobata S, Sato R, Fujisawa R. 2017.
-Anomalous diffusion on the servosphere : A potential tool for detecting
-inherent organismal movement patterns. *PLoS ONE* **12**:e0177480.
-doi:10.1371/journal.pone.0177480
-
-Nutting WL. 1969. 8 Flight and colony foundation. In: Krishna K, Weesner
-FM, editors. Biology of Termites. New York: Academic Press. pp. 233–282.
-doi:10.1016/B978-0-12-395529-6.50012-X
-
-R Core Team. 2023. R: A language and environment for statistical
-computing.
-
-Wickman P-O, Jansson P. 1997. An estimate of female mate searching costs
-in the lekking butterfly Coenonympha pamphilus. *Behavioral Ecology and
+Abe MS, Shimada M. 2015. Lévy walks suboptimal under predation risk.
+*PLoS Computational Biology* **11**:e1004601.
+doi:10.1371/journal.pcbi.1004601Bartumeus F, Catalan J. 2009. Optimal
+search behavior and classic foraging theory. *Journal of Physics A:
+Mathematical and Theoretical* **42**:434002.
+doi:10.1088/1751-8113/42/43/434002Bartumeus F, Da Luz MGE, Viswanathan
+GM, Catalan J. 2005. Animal search strategies: a quantitative random
+walk analysis. *Ecology* **86**:3078–3087. doi:10.1890/04-1806Bartumeus
+F, Peters F, Pueyo S, Marrase C, Catalan J. 2003. Helical Levy walks:
+Adjusting searching statistics to resource availability in
+microzooplankton. *Proceedings of the National Academy of Sciences of
+the United States of America* **100**:12771–12775.
+doi:10.1073/pnas.2137243100Cain ML. 1985. Random search by herbivorous
+insects: a simulation model. *Ecology* **66**:876–888.
+doi:10.2307/1940550Humphries NE, Queiroz N, Dyer JRM, Pade NG, Musyl MK,
+Schaefer KM, Fuller DW, Brunnschweiler JM, Doyle TK, Houghton JDR, Hays
+GC, Jones CS, Noble LR, Wearmouth VJ, Southall EJ, Sims DW. 2010.
+Environmental context explains Lévy and Brownian movement patterns of
+marine predators. *Nature* **465**:1066–1069.
+doi:10.1038/nature09116James A, Plank MJ, Brown R. 2008. Optimizing the
+encounter rate in biological interactions: Ballistic versus Lévy versus
+Brownian strategies. *Physical Review E* **78**:051128.
+doi:10.1103/PhysRevE.78.051128Koto A, Mersch D, Hollis B, Keller L.
+2015. Social isolation causes mortality by disrupting energy homeostasis
+in ants. *Behavioral Ecology and Sociobiology* **69**:583–591.
+doi:10.1007/s00265-014-1869-6Kusaka A, Matsuura K. 2017. Allee effect in
+termite colony formation: influence of alate density and flight timing
+on pairing success and survivorship. *Insectes Sociaux* **65**:17–24.
+doi:10.1007/s00040-017-0580-9Mitaka Y, Akino T, Matsuura K. 2023.
+Development of a standard medium for culturing the termite
+Reticulitermes speratus. *Insect Soc* **70**:265–274.
+doi:10.1007/s00040-023-00907-6Mizumoto N, Abe MS, Dobata S. 2017a.
+Optimizing mating encounters by sexually dimorphic movements. *Journal
+of The Royal Society Interface* **14**:20170086.
+doi:10.1098/rsif.2017.0086Mizumoto N, Bourguignon T, Bailey NW. 2022.
+Ancestral sex-role plasticity facilitates the evolution of same-sex
+sexual behavior. *Proceedings of the National Academy of Sciences of the
+United States of America* **119**:e2212401119.
+doi:10.1073/pnas.2212401119Mizumoto N, Dobata S. 2019. Adaptive switch
+to sexually dimorphic movements by partner-seeking termites. *Science
+Advances* **5**:eaau6108. doi:10.1126/sciadv.aau6108Mizumoto N, Dobata
+S. 2018. The optimal movement patterns for mating encounters with
+sexually asymmetric detection ranges. *Scientific Reports* **8**:3356.
+doi:10.1038/s41598-018-21437-3Mizumoto N, Fuchikawa T, Matsuura K.
+2017b. Pairing strategy after today’s failure: unpaired termites
+synchronize mate search using photic cycles. *Population Ecology*
+**59**:205–211. doi:10.1007/s10144-017-0584-3Mizumoto N, Lee SB,
+Valentini G, Chouvenc T, Pratt SC. 2021. Coordination of movement via
+complementary interactions of leaders and followers in termite mating
+pairs. *Proceedings of the Royal Society B: Biological Sciences*
+**288**:20210998. doi:10.1098/rspb.2021.0998Mizumoto N, Yashiro T,
+Matsuura K. 2016. Male same-sex pairing as an adaptive strategy for
+future reproduction in termites. *Animal Behaviour* **119**:179–187.
+doi:10.1016/j.anbehav.2016.07.007Nagaya N, Mizumoto N, Abe MS, Dobata S,
+Sato R, Fujisawa R. 2017. Anomalous diffusion on the servosphere : A
+potential tool for detecting inherent organismal movement patterns.
+*PLoS ONE* **12**:e0177480. doi:10.1371/journal.pone.0177480Nutting WL.
+1969. 8 Flight and colony foundation. In: Krishna K, Weesner FM,
+editors. Biology of Termites. New York: Academic Press. pp. 233–282.
+doi:10.1016/B978-0-12-395529-6.50012-XPalyulin VV, Chechkin AV, Metzler
+R. 2014. Levy flights do not always optimize random blind search for
+sparse targets. *Proceedings of the National Academy of Sciences of the
+United States of America* **111**:2931–2936.
+doi:10.1073/pnas.1320424111R Core Team. 2023. R: A language and
+environment for statistical computing.Reynolds AM. 2006. Optimal
+scale-free searching strategies for the location of moving targets: New
+insights on visually cued mate location behaviour in insects. *Physics
+Letters A* **360**:224–227.
+doi:10.1016/j.physleta.2006.08.047Viswanathan GM, Buldyrev SV, Havlin S,
+da Luz MGE, Raposo EP, Stanley HE. 1999. Optimizing the success of
+random searches. *Nature* **401**:911–914. doi:10.1038/44831Viswanathan
+GM, Luz M da, Raposo EP, Stanley HE. 2011. The Physics of Foraging: An
+Introduction to Random Searches and Biological Encounters. Cambridge:
+Cambridge University Press.Weimerskirch H, Pinaud D, Pawlowski F, Bost
+C-A. 2007. Does prey capture induce area‐restricted search? A fine-scale
+study using GPS in a marine predator, the wandering albatross. *The
+American Naturalist* **170**:734–743. doi:10.1086/522059Wickman P-O,
+Jansson P. 1997. An estimate of female mate searching costs in the
+lekking butterfly Coenonympha pamphilus. *Behavioral Ecology and
 Sociobiology* **40**:321–328. doi:10.1007/s002650050348
 
-**Supplemental materials**
+**Supplemental materials **
 
 **Figure S1**. Trajectories on the servosphere of all observed
 individuals.
 
 **Figure S2.** Observational arena for tandem pairing.
 
-<img src="media/image4.png" style="width:7in;height:4.10417in" />
+![](media/image4.png)
 
 > **Figure S1**. Trajectories on the servosphere of all observed
 > individuals. Each label indicates Species name (Rs = *Reticulitermes
 > speratus*) + Colony name + Sex + Replicates.
 
-<img src="media/image5.png" style="width:2.95833in;height:3.08333in" />
+![](media/image5.png)
 
 > **Figure S2.** Observational arena for tandem pairing. A video camera
 > was located above the observation area on a tripod. Termites were
