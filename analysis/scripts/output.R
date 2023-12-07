@@ -351,10 +351,10 @@ tandem_plot <- function(){
     scale_x_discrete(labels=c("5" = "0-5", "10" = "5-10", 
                               "15" = "10-15", "20" = "15-20",
                               "25" = "20-25", "30" = "25-30"))+ 
-    theme(axis.text = element_text(size = 7),
-          axis.title = element_text(size = 9),
+    theme(axis.text = element_text(size = 8),
+          axis.title = element_text(size = 10),
           legend.position = "none")
-  ggsave("output/tandem_development.pdf", width=3.6, height=3)
+  ggsave("output/tandem_development.pdf", width=3.3, height=3)
   
   dt <- d.tandem
   wilcox.exact(dt[dt$minute==30 & dt$day==0,]$tandem, 
@@ -387,10 +387,10 @@ tandem_plot <- function(){
                               "maletandem" = "Male-Male",
                               "tandem3" = "> 2 individuals"))+
     xlab("")+ylab("Number of observations")+ 
-    theme(axis.text = element_text(size = 7),
-          axis.title = element_text(size = 9),
+    theme(axis.text = element_text(size = 8),
+          axis.title = element_text(size = 10),
           legend.position = "none")
-  ggsave("output/tandem_total.pdf", width=3.6, height=3)
+  ggsave("output/tandem_total.pdf", width=3.3, height=3)
   
   apply(tapply(dts$obs, dts[,2:3], sum), 1, sum)
   tapply(dts$obs, dts[,2:3], sum)
