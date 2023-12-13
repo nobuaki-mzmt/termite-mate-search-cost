@@ -35,21 +35,21 @@ are not always able to achieve the optimal random search. Energy
 depletion, for example, limits searchers’ movement activities, forcing
 them to adjust their behaviors before and after encounters. Here, we
 quantified the cost of mate search in a termite, *Reticulitermes
-speratus*, and also revealed that the searching cost reduces the
-selectivity of mating partners. After a dispersal flight, termites
-search for a mating partner until they find one or die. We found that
-their movement activity and diffusiveness progressively declined over
-observational days. Our data-based simulations qualitatively confirmed
-that the reduced movement diffusiveness decreased the searching
-efficiency. Also, termites with prolonged search periods had lower
-colony foundation success and fewer offspring. Thus, mate search imposes
-doubled costs on termites. Finally, we found that termites with an
-extended mate search reduced the selectivity of mating partners, where
-males immediately paired with any encountering females. Thus, termites
-dramatically changed their mate search behavior depending on their
-physiological conditions. Our finding highlights that accounting for the
-searchers’ internal states is essential to fill the gap between random
-search theories and empirical behavioral observations.
+speratus*, and revealed that the searching cost reduces the selectivity
+of mating partners. After a dispersal flight, termites search for a
+mating partner with limited reserved energy. We found that their
+movement activity and diffusiveness progressively declined over extended
+mate search. Our data-based simulations qualitatively confirmed that the
+reduced movement diffusiveness decreased the searching efficiency. Also,
+termites with prolonged search periods had lower colony foundation
+success and fewer offspring. Thus, mate search imposes doubled costs on
+termites. Finally, we found that termites with an extended mate search
+reduced the selectivity of mating partners, where males immediately
+paired with any encountering females. Thus, termites dramatically
+changed their mate search behavior depending on their physiological
+conditions. Our finding highlights that accounting for the searchers’
+internal states is essential to fill the gap between random search
+theories and empirical behavioral observations.
 
 **Keywords:** Random walk; Tandem runs; Sexual selection; Social
 insects; Movement ecology
@@ -82,24 +82,23 @@ Mate search is essential for sexual reproduction, and random search
 theories predict that both females and males evolved sex-specific
 movement patterns to optimize mating encounters (Mizumoto et al., 2017a;
 Mizumoto and Dobata, 2018; Reynolds, 2006). However, behavior after
-encounter is also critical to obtaining a partner in mating. When the
-cost of mating is high, both females and males decide whether to accept
-or rejct the partner after encountering each other (Courtiol et al.,
-2016). This choosiness can incur a fitness cost even in monogamous
-animals because mating events are sequential in random mate search
-(e.g., (Dechaume-Moncharmont et al., 2016), but see (Forstmeier et al.,
-2021)). Mate searchers may not revisit rejected partners; thus,
-rejecting mates increases the probability of dying before being
-reproduced (Etienne et al., 2014; Kokko and Mappes, 2005). The level of
-choosiness is highly variable according to species (e.g., (Edward and
-Chapman, 2011)), and theory predicts that it depends on a variety of
-factors, such as the frequency of mating encounters (Courtiol et al.,
-2016; Etienne et al., 2014). Thus, by changing the encounter frequency,
-random search efficiency must subsequently affect the decision-making
-process for mate choice. For example, if mate searchers could not
-achieve the optimal movements due to physiological conditions, mate
-searchers would plastically adjust their subsequent mate choice after
-encounters.
+encounters is also critical for a successful mating. When mating costs
+are high, both females and males decide whether to accept or reject the
+partner after encountering each other (Courtiol et al., 2016). This
+choosiness can incur a fitness cost even in monogamous animals because
+mating events are sequential in random mate search (e.g.,
+(Dechaume-Moncharmont et al., 2016), but see (Forstmeier et al., 2021)).
+Mate searchers may not revisit rejected partners; thus, rejecting mates
+increases the probability of dying before being reproduced (Etienne et
+al., 2014; Kokko and Mappes, 2005). The level of choosiness is highly
+variable according to species (e.g., (Edward and Chapman, 2011)), and
+theory predicts that it depends on a variety of factors, such as the
+frequency of mating encounters (Courtiol et al., 2016; Etienne et al.,
+2014). Thus, by changing the encounter frequency, random search
+efficiency must subsequently affect the decision-making process for mate
+choice. For example, if mate searchers could not achieve the optimal
+movements due to physiological conditions, mate searchers would
+plastically adjust their subsequent mate choice after encounters.
 
 To study the plastic changes of random search, *Reticulitermes* termites
 provide an ideal system. During a particular season, alates (winged
@@ -111,13 +110,13 @@ process, both females and males of termites flexibly change their random
 search strategies to enhance mating encounters. Before encounters, both
 females and males actively explore the environments to cover a broad
 area (Mizumoto and Dobata, 2019), while leaders pause and followers move
-to enhance reunion once they are accidentally separated during tandem
+to enhance reunion once they accidentally separated during tandem
 pairing (Mizumoto et al., 2022; Mizumoto and Dobata, 2019). Pairs
 excavate wood or soil to establish a nest when they find a candidate
 place. Because termites are monogamous and spend the rest of their life
 with a specific partner, females and males are expected to choose a
 partner to some extent (Li et al., 2013; Matsuura et al., 2002).
-However, at the same time, as their mate search priod is strictly
+However, at the same time, as their mate search period is strictly
 limited from a few hours to a few days (Kusaka and Matsuura, 2017),
 choosy individuals can likely end up having no partner and die. Thus,
 termites are expected to change their choosiness dynamically, depending
@@ -154,12 +153,12 @@ After the swarming flights, both females and males actively move to
 search for a mating partner in *R. speratus* (Mizumoto and Dobata,
 2019). However, according to time, the search activity was progressively
 reduced (Fig. 1B). When we observed mate search behaviors of termites on
-a servosphere each day, we found that traveled distances were
-significantly declined according to extended mate search **(**LMM, LRT,
-day: χ<sup>2</sup><sub>3</sub> = 98.9, *P* \< 0.001, Fig. 1C), with
-females moving more distances than males (χ<sup>2</sup><sub>1</sub> =
-4.5, *P* = 0.033). Similarly, both females and males paused for a longer
-duration according to observational day **(**LMM, LRT, day:
+a servosphere each day, we found that traveled distances significantly
+declined according to extended mate search **(**LMM, LRT, day:
+χ<sup>2</sup><sub>3</sub> = 98.9, *P* \< 0.001, Fig. 1C), with females
+moving more distances than males (χ<sup>2</sup><sub>1</sub> = 4.5, *P* =
+0.033). Similarly, both females and males paused for a longer duration
+according to observational day **(**LMM, LRT, day:
 χ<sup>2</sup><sub>3</sub> = 71.7, *P* \< 0.001, Fig. 1D), with no
 sexual differences **(**χ<sup>2</sup><sub>1</sub> = 1.84, *P* = 0.17,
 Fig. 1D). This difference of movement activities turned out the
@@ -169,12 +168,13 @@ decreased according to days after swarming (LMM, LRT, day:
 χ<sup>2</sup><sub>3</sub> = 398.9, *P* \< 0.001, Fig. 1E). Note that
 the slopes did not change according to observation days in termites
 (LMM, LRT, interactions between day and τ: χ<sup>2</sup><sub>3</sub> =
-5.89, *P* = 0.11), indicating that the decrease of MSD was caused by
+5.89, *P* = 0.11), indicating that the decrease of MSD came from the
 changes of movement activities, such as movement speed and pausing
 duration, rather than the type of random walks, e.g., changes of turning
-patterns or Lévy walk properties. Therefore, the observed behavioral
-changes did not reflect the changes in random search strategies but the
-inactivity of termites, perhaps caused by energy depletion.
+patterns or Lévy walk properties (Viswanathan et al., 2011). Therefore,
+the observed behavioral changes did not reflect the changes in random
+search strategies but the inactivity of termites, perhaps caused by
+energy depletion.
 
 When termites search for a mating partner whose location is unknown to
 searchers, high diffusiveness (large MSD) is critical for encounter
@@ -223,21 +223,21 @@ extended mating search incurs the cost of colony foundation success. The
 colony foundation success was significantly reduced in termite pairs
 that experienced three days extended search, compared with those found a
 colony just after swarming (GLMM, LRT, sex: χ<sup>2</sup><sub>1</sub> =
-4.02, *P* = 0.04; Fig. 2B). Also, after the successful colony
+4.02, *P* = 0.04; Fig. 2A). Also, after the successful colony
 foundations, pairs with extended mate search had the significantly
 smaller number of offspring (GLMM, LRT, sex: χ<sup>2</sup><sub>1</sub> =
-4.14, *P* = 0.04, Fig. 2C). Thus, even after the mate search period,
+4.14, *P* = 0.04, Fig. 2B). Thus, even after the mate search period,
 extended mate search adversely impacted the performance of the colony
 foundation.
 
 The termites with extended mate search should be less attractive options
 for other termites to make a pair because they perform less during
-colony foundations. We then tested if the extended search incurred the
-additional cost by reducing the competitiveness during partner
-selection. We presented two females (or two males) who experienced
-extended mate search (old) or just after swarming (new) to a new male
-(or a female). Then, we observed which tandem pairing, new-new or
-new-old, was observed after 10 minutes. We found that termites with
+colony foundations (Fig. 2AB). We then tested if the extended search
+incurred the additional cost by reducing the competitiveness during
+partner selection. We presented two females (or two males) who
+experienced extended mate search (old) or just after swarming (new) to a
+new male (or a female). Then, we observed which tandem pairing, new-new
+or new-old, was observed after 10 minutes. We found that termites with
 extended mate search performed as well as the termites just after
 swarming as a tandem pairing partner candidate during mate choice. There
 was no significant difference between old and new males (Binomial test,
@@ -245,14 +245,17 @@ old:new = 19:10, *P* = 0.14) and between old and new females (Binomial
 test, old:new = 17:12, *P* = 0.46).
 
 Interestingly, termites after extended mate search had larger fresh body
-weight than termites just after swarming. Termite alates lose weight by
-evacuating water just before the swarming to improve their flight and
-dispersal capacity. Thus, termites with extended mate search could gain
-weight by getting water in their body (Chouvenc, 2022). Because heavier
-termites often tend to obtain a partner if they have multiple
-individuals around (Li et al., 2013; Matsuura et al., 2002), termites
-with extended mate search might compensate for the cost of mate search
-by collecting water.
+weight than termites just after swarming (LMM, LRT, sex:
+χ<sup>2</sup><sub>1</sub> = 153.12, *P* \< 0.001, day:
+χ<sup>2</sup><sub>1</sub> = 67.04, *P* \< 0.001, interaction:
+χ<sup>2</sup><sub>1</sub> = 0.02, *P* = 0.88, Fig. 2C). Termite alates
+lose weight by evacuating water just before the swarming to improve
+their flight and dispersal capacity. Thus, termites with extended mate
+search could gain weight by getting water in their body (Chouvenc,
+2022). Because heavier termites often tend to obtain a partner if they
+have multiple individuals around (Li et al., 2013; Matsuura et al.,
+2002), termites with extended mate search might compensate for the cost
+of mate search by collecting water.
 
 ![](media/image2.png)
 
@@ -268,38 +271,38 @@ by collecting water.
 
 Finally, we investigated how extended mate search alters the
 decision-making of termites after encountering mating partners. We
-introduced 40 termites that experienced extended mate search or just
-after swarming to a large experimental arena (ø = 600 mm) and then
-observed the dynamics of tandem pairing. We found that extended mate
-search in isolation dramatically increased the motivation of tandem
-running behavior in termites (Video S1-2). In total, we observed 219
-tandem runs for termites just after swarming (166 heterosexual, 36
-male-male, one female-female tandem run, and 16 tandems with \>2
-individuals), while 679 for termites that experienced 72 hours of mate
-search (564 heterosexual, 30 male-male, six female-female, and 79
-tandems with \>2 individuals), during 30 minutes observations. Termites
-with extended mate search showed significantly larger number of
+introduced 40 termites (20 females and 20 males) that experienced
+extended mate search or just after swarming to a large experimental
+arena (ø = 600 mm) and then observed the dynamics of tandem pairing. We
+found that extended mate search in isolation dramatically increased the
+motivation of tandem running behavior in termites (Video S1-2). In
+total, we observed 219 tandem runs for termites just after swarming (166
+heterosexual, 36 male-male, one female-female tandem run, and 16 tandems
+with \>2 individuals), while 679 for termites that experienced 72 hours
+of mate search (564 heterosexual, 30 male-male, six female-female, and
+79 tandems with \>2 individuals), during 30 minutes observations.
+Termites with extended mate search showed significantly more
 heterotrophic tandem runs (Wilcoxon Signed rank test, *V* = 0, *P* =
-0.03; Fig. 3B) and tandem runs with more than two individuals (Wilcoxon
-signed rank test, *V* = 0, *P* = 0.03; Fig. 3B), but not male-male
-(Wilcoxon signed rank test, *V* = 14, *P* = 0.56; Fig. 3B) and
+0.03; Fig. 3A) and tandem runs with more than two individuals (Wilcoxon
+signed rank test, *V* = 0, *P* = 0.03; Fig. 3A), but not male-male
+(Wilcoxon signed rank test, *V* = 14, *P* = 0.56; Fig. 3A) and
 female-female tandem runs (Wilcoxon signed rank test, *V* = 1.5, *P* =
-0.375; Fig. 3B). Most tandem runs with more than two individuals were
+0.375; Fig. 3A). Most tandem runs with more than two individuals were
 that two males following one female (84/95; 88.4%). There was no
 significant difference in the number of tandems between nest-mate or
 non-nest mate pairing in all these pairing combinations (Wilcoxon signed
-rank test, 0 day: *V* = 10, *P* = 1; 3 day: *V* = *8*, P = 0.6875).
+rank test, 0 day: *V* = 10, *P* = 1; 3 day: *V* = *8*, *P* = 0.6875).
 
 Furthermore, we found distinct patterns of time development of tandem
 pairing between termites with and without extended mate search. In
 termites just after swarming, the number of observed tandem runs
 increased according to the observational periods, where termites exhibit
 fewer tandem runs soon after being introduced to the arena (Spearman’s
-rank correlation, *S* = 3.55, *P* = 0.01; Fig. 3A). On the other hand,
+rank correlation, *S* = 3.55, *P* = 0.01; Fig. 3B). On the other hand,
 in termites with extended mate search, the number of tandem runs was
 higher than the last 5 minutes of termites just after swarming and did
 not increase according to observational periods (Spearman’s rank
-correlation, *S* = 26, *P* = 0.66; Fig. 3A). Thus, the motivation of
+correlation, *S* = 26, *P* = 0.66; Fig. 3B). Thus, the motivation of
 tandem runs was highest in termites with experiencing extended searches,
 while it increased according to time in termites just after swarming.
 
@@ -329,9 +332,9 @@ obtain further energy until they successful start establishing the new
 colonies (Chouvenc, 2022; Inagaki et al., 2020). Accordingly, energy
 costs associated with mate search further decreased the successes of
 colony foundations and the number of offspring after foundations (Fig.
-2). Thus, mate search is a highly cost-intensive work for termites, and
-for these animals, searching activity itself could lead to the changes
-of movement patterns for a random search. Such time development of
+2). Thus, mate search is a highly cost-intensive work for termites. Our
+results indicate that the search activity itself could lead to changes
+in movement patterns for a random search. Such time development of
 searchers’ internal state has rarely been considered in the theory of
 optimal random search. However, it could be a critical component in the
 movement ecology of real animals.
@@ -358,9 +361,9 @@ discriminative to their mating partners and often show same-sex pairing
 search strategy during mate pairing; instead, they combine it with other
 decision-making systems to rationally obtain a partner.
 
-Tandem pairing dynamics of termites were distinct between individuals
-just after swarming and with extended mate search. In termites just
-after swarming, the number of observed tandem runs increased during
+Pairing dynamics of termites were distinct between individuals just
+after swarming and with extended mate search. In termites just after
+swarming, the number of observed tandem runs increased during
 observational periods, while it was highest since the beginning in the
 individuals with extended mate search (Fig. 3B). This pattern could be
 interpreted with a sequential choice model (Janetos, 1980; Real, 1990).
@@ -455,7 +458,7 @@ travels from its starting location to another point during a given time,
 *computeMSD*() in the package “flowcatchR”. To compare the MSD between
 time after swarming, we used an LMM, where τ, time after swarming, sex,
 and their interactions were included as fixed effects, and individual
-ids nested within original colonies were included as a random effect
+IDs nested within original colonies were included as a random effect
 (random intercept). MSD and τ were log transformed before the LMM
 fitting.
 
@@ -522,11 +525,11 @@ other one.
 *Change of fresh weight and mate preference*
 
 Fresh body weight is often used as an indicator of the quality of
-termite dealates because heavier termites are preferred as a mating
-partner (Li et al., 2013; Matsuura et al., 2002). We examined how body
-weight could change during extended mate search and how it affected
-mating preferences. Using three colonies collected in 2016, we compared
-the fresh weights of eight females and males for each colony just after
+termite dealates because heavier termites are preferred as partners (Li
+et al., 2013; Matsuura et al., 2002). We examined how body weight could
+change during extended mate search and how it affected mating
+preferences. Using three colonies collected in 2016, we compared the
+fresh weights of eight females and males for each colony just after
 swarming and after 72 hours of mate search. We performed the
 measurements on a scale of 0.01 mg.
 
