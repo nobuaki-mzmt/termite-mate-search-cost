@@ -1,5 +1,4 @@
 ## Data analysis on tired termite project
-## N. Mizumoto
 
 #------------------------------------------------------------------------------#
 # This file is for preprocess all data for statistical analysis and plot

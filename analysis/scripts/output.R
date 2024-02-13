@@ -1,5 +1,4 @@
 ## Data analysis on tired termite project
-## N. Mizumoto
 
 #------------------------------------------------------------------------------#
 # This script displays the results 
