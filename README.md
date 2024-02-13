@@ -2,10 +2,14 @@
 ## Article Information
 This repository provides access to the data and source code used for the manuscript    
 ### **Wasted efforts impair random search efficiency and reduce the level of choosiness in mate-pairing termites**    
-Nobuaki Mizumoto, Naohisa Nataya, Ryusuke Fujisawa  
+Author names are commented out for DBR.
+<!-- Nobuaki Mizumoto, Naohisa Nataya, Ryusuke Fujisawa  
 
 Preprint will be available at bioRxiv. [![DOI:XXX](http://img.shields.io/badge/DOI-10.1101/XXX.svg)]  
-The all data will be uploaded in Zenodo upon acceptance: [![DOI](https://zenodo.org/badge/DOI/XXXDOIXXX.svg)](https://doi.org/XXXDOIXXX)
+The all data will be uploaded in Zenodo upon acceptance: [![DOI](https://zenodo.org/badge/DOI/XXXDOIXXX.svg)](https://doi.org/XXXDOIXXX)-->
+
+This study examines how movement patterns of mate searchers of a termite Reticulitermes speratus changes according to time. Then investigated how this change in movement patterns affect random search efficiency and mate choice behavior.  
+This includes tracking data, R codes to analyze it, and Cpp code for simulations.  
 
 ## Table of Contents
 * [README](./README.md)
