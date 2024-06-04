@@ -356,12 +356,28 @@ tandem_plot <- function(){
   ggsave("output/tandem_development.pdf", width=3.3, height=3)
   
   dt <- d.tandem
+  
+  ## statistical tests with non-parametric
   wilcox.exact(dt[dt$minute==30 & dt$day==0,]$tandem, 
                dt[dt$minute==5 & dt$day==0,]$tandem, paired=T)
   # V = 21, p-value = 0.03125
   wilcox.exact(dt[dt$minute==30 & dt$day==3,]$tandem, 
                dt[dt$minute==5 & dt$day==3,]$tandem, paired=T)
   # V = 11, p-value = 1
+  
+  ## statistical tests with GLMM, where colony combinations were treated as random factor
+  r <- glmer(tandem ~ as.factor(minute) + (1|comb), family = "poisson",  
+             data = subset(dt, day == 0 & (minute == 5 | minute == 30)))
+  Anova(r)
+  
+  r <- glmer(tandem ~ as.factor(minute) + (1|comb), family = "poisson",  
+             data = subset(dt, day == 3 & (minute == 5 | minute == 30)))
+  Anova(r)
+  
+  r <- glmer(tandem ~ as.factor(minute) + (1|comb), family = "poisson",  
+             data = subset(dt, day == 3 & (minute == 5 | minute == 30)))
+  Anova(r)
+  
   
   X <- tapply(dt$tandem, dt[,3:2], sum)
   cor.test(1:6, X[,1], method="spearman")
@@ -406,5 +422,38 @@ tandem_plot <- function(){
   wilcox.exact(dts[dts$type=="tandem3"&dts$day==0,]$obs, 
                dts[dts$type=="tandem3"&dts$day==3,]$obs, paired=T)
   #V = 0, p-value = 0.03125
+  
+  ## statistical tests with GLMM, where colony combinations were treated as random factor
+  r <- glmer(obs ~ as.factor(day) + (1|comb), family = "poisson",  
+             data = subset(dts, type == "heterotandem"))
+  Anova(r)
+  
+  r <- glmer(obs ~ as.factor(day) + (1|comb), family = "poisson",  
+             data = subset(dts, type == "maletandem"))
+  Anova(r)
+  
+  r <- glmer(obs ~ as.factor(day) + (1|comb), family = "poisson",  
+             data = subset(dts, type == "femaletandem"))
+  Anova(r)
+  
+  r <- glmer(obs ~ as.factor(day) + (1|comb), family = "poisson",  
+             data = subset(dts, type == "tandem3"))
+  Anova(r)
+  
+  # nest mate non nest mate
+  dtn <- rbind(data.frame(dt[,1:3], mate = "nestmate", obs = dt$nestmate),
+    data.frame(dt[,1:3], mate = "nonnestmate", obs = dt$non.nestmate))
+  
+  dtns <- dtn %>%
+    group_by(comb , day, mate) %>%
+    summarize(obs = sum(obs))
+  
+  r <- glmer(obs ~ as.factor(mate) + (1|comb), family = "poisson",  
+             data = subset(dtns, day == 0))
+  Anova(r)
+
+  r <- glmer(obs ~ as.factor(mate) + (1|comb), family = "poisson",  
+             data = subset(dtns, day == 3))
+  Anova(r)
 }
 
