@@ -8,6 +8,7 @@
 
 #------------------------------------------------------------------------------#
 {
+  rm(list = ls())
   library(data.table)
   
   library(lme4)
@@ -22,8 +23,6 @@
   
 }
 #------------------------------------------------------------------------------#
-
-rm(list = ls())
 
 #------------------------------------------------------------------------------#
 plot_trajectories <- function(){
@@ -235,8 +234,8 @@ plot_colonyfoundation <- function(){
     theme_classic()+
     theme(legend.position = "none")+
     xlab("")+ylab("Prop of colony foundation success")+
-    geom_text(aes(x=2, y=0.5, label = "40/45")) +
-    geom_text(aes(x=1, y=0.5, label = "28/39"))
+    geom_text(aes(x=1, y=0.5, label = "40/45")) +
+    geom_text(aes(x=2, y=0.5, label = "28/39"))
   ggsave("output/foundation_success.pdf", width=3, height=4)
   
   ggplot(d.foundation[d.foundation$foundation==1,], 
@@ -293,10 +292,10 @@ plot_weightchange <- function(){
 
 #------------------------------------------------------------------------------#
 mate.choice <- function(){
-  # Male, old=19, new=10, NA=6
-  binom.test(c(10,19), p=1/2) 
-  # Female, old=17, new=12, NA=4
-  binom.test(c(12,17), p=1/2) 
+  # Male, old=19, new=11, NA=7
+  binom.test(c(11,19), p=1/2) 
+  # Female, old=16, new=13, NA=4
+  binom.test(c(13,16), p=1/2) 
   
   df_temp = data.frame(
     win = c(rep("old",19),rep("new",10),rep("old",17),rep("new",12)),
@@ -456,4 +455,16 @@ tandem_plot <- function(){
              data = subset(dtns, day == 3))
   Anova(r)
 }
+#------------------------------------------------------------------------------#
 
+#------------------------------------------------------------------------------#
+{
+  plot_trajectories()
+  plot_MSD()
+  plot_summary()
+  plot_colonyfoundation()
+  plot_weightchange()
+  mate.choice()
+  tandem_plot()
+}
+#------------------------------------------------------------------------------#

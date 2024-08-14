@@ -6,14 +6,12 @@
 
 #------------------------------------------------------------------------------#
 {
+  rm(list = ls())
+  
   library(data.table)
   library(stringr)
   
   library(CircStats)
-}
-{
-  data.convert(7500)
-  data.summarize()
 }
 #------------------------------------------------------------------------------#
 
@@ -100,7 +98,7 @@ data.convert <- function(msd_max = 5000){
     
     
   }
-  save(df_all, df_MSD, df_pause, file = "data/df_all.rda")
+  save(df_all, df_MSD, df_pause, file = "data/fmt/df_all.rda")
 }
 #------------------------------------------------------------------------------#
 
@@ -108,7 +106,7 @@ data.convert <- function(msd_max = 5000){
 #------------------------------------------------------------------------------#
 data.summarize <- function(){
   
-  load("data/df_all.rda")
+  load("data/fmt/df_all.rda")
   
   ids = unique(df_all$id)
   df_sum <- NULL
@@ -150,7 +148,28 @@ data.summarize <- function(){
       df_sum <- rbind(df_sum, df_temp)
     }
   }
-  save(df_sum, file="data/df_sum.rda")
+  save(df_sum, file="data/fmt/df_sum.rda")
+}
+#------------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------------#
+{
+  data.convert(7500)
+  data.summarize()
+}
+#------------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------------#
+{
+  # additional codes to convert rda into csv
+  load("data/fmt/df_all.rda")
+  load("data/fmt/df_sum.rda")
+  load("data/fmt/df_sim.rda")
+  write.csv(df_all, file   = "data/fmt/df_all.csv", row.names = FALSE)
+  write.csv(df_MSD, file   = "data/fmt/df_MSD.csv", row.names = FALSE)
+  write.csv(df_pause, file = "data/fmt/df_pause.csv", row.names = FALSE)
+  write.csv(df_sim, file   = "data/fmt/df_sim.csv", row.names = FALSE)
+  write.csv(df_sum, file   = "data/fmt/df_sum.csv", row.names = FALSE)
 }
 #------------------------------------------------------------------------------#
 
