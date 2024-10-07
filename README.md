@@ -5,10 +5,11 @@ This repository provides access to the data and source code used for the manuscr
 #### Nobuaki Mizumoto, Naohisa Nataya, Ryusuke Fujisawa  
 Contact, Nobuaki Mizumoto: nzm0095@auburn.edu
 
-This paper is accepted at The American Naturalist.  
+This paper is published in [The American Naturalist](https://doi.org/10.1086/732877).  
 Preprint is available at [bioRxiv](http://img.shields.io/badge/DOI-10.1101/2024.02.01.578198.svg).  
+Data is also archived at [zenodo](https://zenodo.org/records/13324360).
 
-This study examines how movement patterns of mate searchers of a termite _Reticulitermes speratus_ changes according to time. Then investigated how this change in movement patterns affect random search efficiency and mate choice behavior.  
+This study examines how movement patterns of mate searchers of a termite _Reticulitermes speratus_ change according to time. Then, we investigated how this change in movement patterns affects random search efficiency and mate choice behavior.  
 This includes tracking data, R codes to analyze it, and Cpp code for simulations.  
 
 ## Table of Contents
