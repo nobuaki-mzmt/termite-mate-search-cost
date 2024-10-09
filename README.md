@@ -2,7 +2,7 @@
 ## Article Information
 This repository provides access to the data and source code used for the manuscript    
 ### **Wasted efforts impair random search efficiency and reduce the level of choosiness in mate-pairing termites**    
-#### Nobuaki Mizumoto, Naohisa Nataya, Ryusuke Fujisawa  
+#### Nobuaki Mizumoto, Naohisa Nagaya, Ryusuke Fujisawa  
 Contact, Nobuaki Mizumoto: nzm0095@auburn.edu
 
 This paper is published in [The American Naturalist](https://doi.org/10.1086/732877).  
